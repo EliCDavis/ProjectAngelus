@@ -16,10 +16,9 @@ public class PlayerMotor : NetworkBehaviour {
     private float m_CameraRotationX = 0f;
     private float m_CurrentRotataionX = 0f;
     private float m_MaxCameraRotation = 90f;
-
     private Rigidbody m_RB;
 
-	// Use this for initialization
+
 	void Start () {
         m_RB = GetComponent<Rigidbody>();
     }
@@ -37,6 +36,11 @@ public class PlayerMotor : NetworkBehaviour {
     public void RotateCamera(float _camerRotation)
     {
         m_CameraRotationX = _camerRotation;
+    }
+
+    public void Jump(float _jumpSpeed)
+    {
+        m_RB.velocity = new Vector3(m_RB.velocity.x, _jumpSpeed, m_RB.velocity.z);
     }
 
     void FixedUpdate()
@@ -69,4 +73,5 @@ public class PlayerMotor : NetworkBehaviour {
             Debug.Log("Error finding components to rotate!");
         }
     }
+
 }
