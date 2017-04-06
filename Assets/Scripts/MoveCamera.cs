@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//This does not work correctley do not use.
 public class MoveCamera : MonoBehaviour {
     [SerializeField]
     private float m_MaxCameraAngle;
