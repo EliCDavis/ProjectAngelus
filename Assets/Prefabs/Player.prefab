@@ -38,12 +38,12 @@ GameObject:
   - component: {fileID: 114742229197299966}
   - component: {fileID: 114122678487663508}
   - component: {fileID: 114259335868617012}
+  - component: {fileID: 114053340307930816}
+  - component: {fileID: 114275780523568712}
   - component: {fileID: 114450521735855230}
   - component: {fileID: 114649528571496440}
   - component: {fileID: 114703766614180600}
   - component: {fileID: 114059540347769328}
-  - component: {fileID: 114053340307930816}
-  - component: {fileID: 114275780523568712}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -530,7 +530,7 @@ MonoBehaviour:
   - {fileID: 20579652774623756}
   - {fileID: 81674848628361910}
   - {fileID: 114053340307930816}
-  m_RemoteLayerMaskName: RemotePlayer
+  m_RemoteMaskName: RemotePlayer
   m_PlayerUIPrefab: {fileID: 1056304494658354, guid: e11cb8690982905458ddfe75ca2694d9,
     type: 2}
 --- !u!114 &114275780523568712

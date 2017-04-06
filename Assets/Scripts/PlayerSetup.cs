@@ -9,7 +9,7 @@ public class PlayerSetup : NetworkBehaviour {
     [SerializeField]
     private Behaviour[] m_ThingsToDisable;                  //List of objects to disable if not player
     [SerializeField]
-    private string m_RemoteLayerMaskName = "RemotePlayer";  //Remote player mask string
+    private string m_RemoteMaskName = "RemotePlayer";  //Remote player mask string
     [SerializeField]
     private GameObject m_PlayerUIPrefab;
  
@@ -80,7 +80,7 @@ public class PlayerSetup : NetworkBehaviour {
     /// </summary>
     void AssigneRemoteLayerMask()
     {
-        gameObject.layer = LayerMask.NameToLayer(m_RemoteLayerMaskName);
+        gameObject.layer = LayerMask.NameToLayer(m_RemoteMaskName);
     }
 
     /// <summary>
