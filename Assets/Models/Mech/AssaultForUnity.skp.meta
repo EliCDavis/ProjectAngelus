@@ -1,0 +1,197 @@
+fileFormatVersion: 2
+guid: aec793ab1355a914ba6c847a7e123469
+timeCreated: 1491877541
+licenseType: Free
+SketchUpImporter:
+  generateBackFace: 0
+  mergeCoplanarFaces: 0
+  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e000000
+  assetHash:
+    serializedVersion: 2
+    Hash: e70a9028213b0a9ef82b6348f5a8a1a9
+  longitude: -105.242139
+  latitude: 40.018309
+  northCorrection: -0
+  fileUnit: 0
+  sketchUpImportData:
+    defaultCamera:
+      position: {x: -3.395542, y: 7.61526, z: -15.659142}
+      lookAt: {x: -0.6789336, y: -75.23145, z: 175.75159}
+      up: {x: 0.0056364103, y: 0.9177414, z: 0.3971384}
+      fov: 35
+      aspectRatio: 0
+      orthoSize: 1
+      isPerspective: 1
+    scenes: []
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: body base
+    100004: body base 1
+    100006: body base 2
+    100008: Head
+    100010: hip piece
+    100012: hip piece 1
+    100014: hip piece 2
+    100016: hip piece 3
+    100018: hip piece 4
+    100020: shoulder
+    100022: shoulder 1
+    100024: shoulder 2
+    100026: shoulder 3
+    100028: shoulder 4
+    100030: shoulder cannon
+    100032: shoulder cannon 1
+    100034: shoulder cannon 2
+    100036: shoulder mount
+    100038: shoulder mount 1
+    100040: Torso
+    100042: Torso 1
+    100044: cannon
+    100046: cannon 1
+    400000: //RootNode
+    400002: body base
+    400004: body base 1
+    400006: body base 2
+    400008: Head
+    400010: hip piece
+    400012: hip piece 1
+    400014: hip piece 2
+    400016: hip piece 3
+    400018: hip piece 4
+    400020: shoulder
+    400022: shoulder 1
+    400024: shoulder 2
+    400026: shoulder 3
+    400028: shoulder 4
+    400030: shoulder cannon
+    400032: shoulder cannon 1
+    400034: shoulder cannon 2
+    400036: shoulder mount
+    400038: shoulder mount 1
+    400040: Torso
+    400042: Torso 1
+    400044: cannon
+    400046: cannon 1
+    2300000: //RootNode
+    2300002: body base
+    2300004: body base 1
+    2300006: body base 2
+    2300008: Head
+    2300010: hip piece
+    2300012: hip piece 1
+    2300014: hip piece 2
+    2300016: hip piece 3
+    2300018: hip piece 4
+    2300020: shoulder
+    2300022: shoulder 1
+    2300024: shoulder 2
+    2300026: shoulder 3
+    2300028: shoulder 4
+    2300030: shoulder cannon
+    2300032: shoulder cannon 1
+    2300034: shoulder cannon 2
+    2300036: shoulder mount
+    2300038: shoulder mount 1
+    2300040: cannon
+    2300042: cannon 1
+    3300000: //RootNode
+    3300002: body base
+    3300004: body base 1
+    3300006: body base 2
+    3300008: Head
+    3300010: hip piece
+    3300012: hip piece 1
+    3300014: hip piece 2
+    3300016: hip piece 3
+    3300018: hip piece 4
+    3300020: shoulder
+    3300022: shoulder 1
+    3300024: shoulder 2
+    3300026: shoulder 3
+    3300028: shoulder 4
+    3300030: shoulder cannon
+    3300032: shoulder cannon 1
+    3300034: shoulder cannon 2
+    3300036: shoulder mount
+    3300038: shoulder mount 1
+    3300040: cannon
+    3300042: cannon 1
+    4300000: Mesh AssaultForUnity
+    4300002: Mesh hip piece
+    4300004: Mesh body base
+    4300006: Mesh shoulder
+    4300008: Mesh Head
+    4300010: Mesh shoulder mount
+    4300012: Mesh shoulder cannon
+    4300014: Mesh cannon
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0254
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
