@@ -545,6 +545,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 100
+  disabledOnDeath:
+  - {fileID: 114122678487663508}
+  - {fileID: 114053340307930816}
 --- !u!114 &114450521735855230
 MonoBehaviour:
   m_ObjectHideFlags: 1

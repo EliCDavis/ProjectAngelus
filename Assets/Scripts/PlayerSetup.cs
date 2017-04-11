@@ -12,7 +12,6 @@ public class PlayerSetup : NetworkBehaviour {
     private string m_RemoteLayerMaskName = "RemotePlayer";  //Remote player mask string
     [SerializeField]
     private GameObject m_PlayerUIPrefab;
- 
     private GameObject m_Canvas;
     private Camera m_ScnenCamera;                           //Reference to scene camera
     private string m_PlayerID;                              //Player ID
@@ -37,6 +36,8 @@ public class PlayerSetup : NetworkBehaviour {
 
             m_ActivePlayer = GetComponent<Player>();
             SetupPlayerUI();
+
+            GetComponent<Player>().Setup();
         }
 	}
 
@@ -71,8 +72,7 @@ public class PlayerSetup : NetworkBehaviour {
 
         m_PlayerUI = _playerUI.GetComponent<PlayerUI>();
 
-        m_PlayerUI.SetUpUI(m_ActivePlayer);
-       
+        m_PlayerUI.SetUpUI(m_ActivePlayer);     
     }
 
     /// <summary>

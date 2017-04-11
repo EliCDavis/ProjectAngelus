@@ -3,6 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+
+    public static GameManager singleton;
+
+    public MatchSettings m_MatchSettings;
+
+    void Awake()
+    {
+        if (singleton != null)
+        {
+            Debug.LogError("More than one GameManger!");
+        }
+        else
+        {
+            singleton = this;
+        }
+    }
+
+    #region playerTracking
+
     /// <summary>
     /// All players ID's and references are stored in a dectionary for easey reference
     /// Keys are "Player " with ID appenede to end of tag.
@@ -40,4 +59,5 @@ public class GameManager : MonoBehaviour {
     {
         return m_Players[_playerID];
     }
+    #endregion
 }

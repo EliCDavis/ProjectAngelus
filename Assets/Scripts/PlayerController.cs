@@ -8,22 +8,16 @@ public class PlayerController : NetworkBehaviour {
 
     [SerializeField]
     private float m_Speed = 5f;
-
     [SerializeField]
     private float m_LookSpeed;
-
     [SerializeField]
     private float m_MaxLookRadious;
-
     [SerializeField]
     private float m_DistanceToGround;
-
     [SerializeField]
     private float m_JumpForce;
-
     [SerializeField]
     private LayerMask m_LayerMask;
-
     private PlayerMotor m_Motor;
     private float m_XLookTotal;
 
