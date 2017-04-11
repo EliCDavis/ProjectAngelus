@@ -26,6 +26,7 @@ public class PlayerShoot : NetworkBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
+            Debug.Log("Shoot");
         }
     }
 
@@ -39,8 +40,11 @@ public class PlayerShoot : NetworkBehaviour {
         RaycastHit _hit;
         if (Physics.Raycast(m_PlayerCamera.transform.position, m_PlayerCamera.transform.forward, out _hit, m_PlayerWeapon.m_Range, m_Mask))
         {
+            Debug.Log(_hit.collider.name);
             if (_hit.collider.tag == PLAYER_NAME)
+            {
                 CmdPlayerShot(_hit.transform.name, m_PlayerWeapon.m_Damage);
+            }
         }
     }
 

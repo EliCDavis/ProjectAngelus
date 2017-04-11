@@ -1,34 +1,22 @@
 fileFormatVersion: 2
-guid: d47ca0407deff394b95ada2300659ef0
-timeCreated: 1491878833
+guid: 1dde5f8224ec77f40988ef5569f9e54b
+timeCreated: 1491932221
 licenseType: Free
-SketchUpImporter:
-  generateBackFace: 0
-  mergeCoplanarFaces: 0
-  selectedNodes: 
-  assetHash:
-    serializedVersion: 2
-    Hash: ea3865c850a4c0d3df5a5ebf06912ec8
-  longitude: 0
-  latitude: 0
-  northCorrection: 0
-  fileUnit: 0
-  sketchUpImportData:
-    defaultCamera:
-      position: {x: 0, y: 0, z: 0}
-      lookAt: {x: 0, y: 0, z: 1}
-      up: {x: 0, y: 1, z: 0}
-      fov: 45
-      aspectRatio: 1.33
-      orthoSize: 0
-      isPerspective: 1
-    scenes: []
+ModelImporter:
   serializedVersion: 19
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Mesh1
+    400000: //RootNode
+    400002: Mesh1
+    2300000: Mesh1
+    3300000: Mesh1
+    4300000: Mesh1
+    6400000: Mesh1
   materials:
     importMaterials: 1
-    materialName: 2
-    materialSearch: 0
+    materialName: 0
+    materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -51,9 +39,9 @@ SketchUpImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.0254
+    globalScale: 50
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -70,7 +58,7 @@ SketchUpImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
