@@ -907,7 +907,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494870056}
   serializedVersion: 5
-  lengthInSec: 19.19
+  lengthInSec: 21.8
   simulationSpeed: 1
   looping: 1
   prewarm: 1
@@ -955,7 +955,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1224538114
+  randomSeed: -475574243
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -1489,7 +1489,7 @@ ParticleSystem:
     serializedVersion: 4
     rateOverTime:
       minMaxState: 0
-      scalar: 150.85
+      scalar: 270.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4475,7 +4475,6 @@ LightProbeGroup:
   - {x: 5.5683246, y: 2.7563744, z: 2.5147095}
   - {x: 5.774885, y: 6.987375, z: -3.677741}
   - {x: 5.444363, y: -4.4959784, z: 2.371787}
-  - {x: 4.84126, y: 0.3549242, z: -3.7211304}
   - {x: -8.567065, y: 3.0025814, z: 11.592628}
   - {x: 6.7474737, y: -4.08595, z: -3.3497343}
   - {x: -5.9775047, y: -4.8259463, z: 2.4489193}
@@ -4513,7 +4512,6 @@ LightProbeGroup:
   - {x: -23.145662, y: -4.9722657, z: 3.3473473}
   - {x: 5.6667614, y: -4.4959784, z: 10.3852215}
   - {x: -1, y: 6.7979045, z: -3.7211304}
-  - {x: -5.9663982, y: 0.3549242, z: -3.7211304}
   - {x: -7.7242894, y: 3.2253194, z: 9.872174}
 --- !u!1 &1250291038
 GameObject:
