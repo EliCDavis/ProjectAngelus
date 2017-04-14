@@ -125,6 +125,21 @@ SketchUpImporter:
     4300010: Mesh shoulder mount
     4300012: Mesh shoulder cannon
     4300014: Mesh cannon
+    6400000: //RootNode
+    6400002: body base
+    6400004: cannon
+    6400006: cannon 1
+    6400008: Head
+    6400010: hip piece
+    6400012: hip piece 1
+    6400014: hip piece 2
+    6400016: hip piece 3
+    6400018: shoulder
+    6400020: shoulder 1
+    6400022: shoulder cannon
+    6400024: shoulder cannon 1
+    6400026: shoulder mount
+    6400028: shoulder mount 1
   materials:
     importMaterials: 1
     materialName: 2
@@ -153,7 +168,7 @@ SketchUpImporter:
     lODScreenPercentages: []
     globalScale: 0.0254
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
