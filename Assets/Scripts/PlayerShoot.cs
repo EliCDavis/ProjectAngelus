@@ -36,6 +36,9 @@ public class PlayerShoot : NetworkBehaviour {
     [Client]
     void Shoot()
     {
+
+		Cursor.lockState = CursorLockMode.Locked;
+
         RaycastHit _hit;
         if (Physics.Raycast(m_PlayerCamera.transform.position, m_PlayerCamera.transform.forward, out _hit, m_PlayerWeapon.m_Range, m_Mask))
         {
