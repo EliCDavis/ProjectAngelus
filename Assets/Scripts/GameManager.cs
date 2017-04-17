@@ -59,5 +59,18 @@ public class GameManager : MonoBehaviour {
     {
         return m_Players[_playerID];
     }
+
+    public static List<Transform> GetPlayerLocations()
+    {
+        List<Transform> _playerlocations = new List<Transform>();
+
+        foreach (var item in m_Players)
+        {
+            _playerlocations.Add(item.Value.transform);
+        }
+
+        return _playerlocations;
+    }
     #endregion
+
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : NetworkBehaviour {
 
@@ -18,6 +19,8 @@ public class Player : NetworkBehaviour {
     [SerializeField]
     private Behaviour[] disabledOnDeath;
     private bool[] wasEnabled;
+    private NetworkStartPosition[] m_SpawnLocations;
+    private Dictionary<float, Transform> m_SpawnSummations;
 
 
     public void Setup ()
@@ -30,6 +33,12 @@ public class Player : NetworkBehaviour {
 
         SetDefaults();
     }
+
+    void Awake()
+    {
+        m_SpawnLocations = FindObjectsOfType<NetworkStartPosition>();
+    }
+
     /*
     //For testing
     void Update()
@@ -85,17 +94,48 @@ public class Player : NetworkBehaviour {
         StartCoroutine(Respawn());
     }
 
+
+    /// <summary>
+    /// Get the summations of playerlocations for each point
+    /// Which ever is larger is the nest point.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Respawn()
     {
 
         yield return new WaitForSeconds(3f);
 
-
         SetDefaults();
 
-        Transform _startPoint = NetworkManager.singleton.GetStartPosition();
-        transform.position = _startPoint.position;
-        transform.rotation = _startPoint.rotation;
+        List<Transform> _playerLocations = GameManager.GetPlayerLocations();
+        m_SpawnSummations = new Dictionary<float, Transform>();
+        Transform _toSpawn = null;
+
+        for (int i = 0; i != m_SpawnLocations.Length; i++ )
+        {
+            float _playerDistance = 0;
+            for (int j = 0; j != _playerLocations.Count; j++)
+            {
+                _playerDistance += Mathf.Log(Vector3.Distance(m_SpawnLocations[i].transform.position, _playerLocations[j].position));
+            }
+
+            m_SpawnSummations.Add(_playerDistance, m_SpawnLocations[i].transform);
+        }
+
+        float maxDistance = 0;
+        
+        foreach (var kvp in m_SpawnSummations)
+        {
+            if (kvp.Key > maxDistance)
+            {
+                maxDistance = kvp.Key;
+                _toSpawn = kvp.Value;
+            }
+        }
+
+        //Transform _startPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = _toSpawn.position;
+        transform.rotation = _toSpawn.rotation;
 
         Debug.Log("Respawning Player: " + transform.name);
     }
