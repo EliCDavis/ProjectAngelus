@@ -254,6 +254,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1565877789208286
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4648619540050352}
+  m_Layer: 8
+  m_Name: Bullet Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1608485416215680
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +296,6 @@ GameObject:
   - component: {fileID: 4636695938782034}
   - component: {fileID: 33886451354914110}
   - component: {fileID: 23631618935973860}
-  - component: {fileID: 65495602754167428}
   m_Layer: 8
   m_Name: cannon
   m_TagString: Player
@@ -336,7 +350,6 @@ GameObject:
   - component: {fileID: 92821203079109178}
   - component: {fileID: 124577809260013172}
   - component: {fileID: 81470495239236788}
-  - component: {fileID: 114102088723581652}
   - component: {fileID: 114120277971857052}
   m_Layer: 8
   m_Name: Main Camera
@@ -383,6 +396,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4636695938782034}
+  - {fileID: 4648619540050352}
   m_Father: {fileID: 4426055162490746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -460,7 +474,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532062320945954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -52.558308, y: 52.470474, z: -21.628231}
+  m_LocalPosition: {x: -16.079317, y: 1.68, z: -20.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4097142102513436}
@@ -529,6 +543,19 @@ Transform:
   m_Father: {fileID: 4097142102513436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 180, z: 0}
+--- !u!4 &4648619540050352
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1565877789208286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4097142102513436}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4648695472019152
 Transform:
   m_ObjectHideFlags: 1
@@ -1261,18 +1288,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65495602754167428
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1638188286855730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6096003, y: 1.9304006, z: 0.60960066}
-  m_Center: {x: 0.3047999, y: -0.254, z: 0.30480012}
 --- !u!65 &65610334448353674
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1323,7 +1338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 4097142102513436}
-  m_ChildIndex: 1
+  m_ChildIndex: 0
   m_SendInterval: 0.1
   m_SyncRotationAxis: 1
   m_RotationSyncCompression: 0
@@ -1364,21 +1379,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 20
   m_InterpolateMovement: 1
---- !u!114 &114102088723581652
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1863595030152502}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8db063a9b359e56438c60a29e4ae45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MaxCameraAngle: 90
-  m_CameraDistance: 5
-  m_LookSpeed: 5
-  m_LookAt: {fileID: 0}
 --- !u!114 &114120277971857052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1478,6 +1478,7 @@ MonoBehaviour:
   m_Mask:
     serializedVersion: 2
     m_Bits: 4294967295
+  bulletSpawn: {fileID: 4648619540050352}
 --- !u!114 &114956019180276384
 MonoBehaviour:
   m_ObjectHideFlags: 1

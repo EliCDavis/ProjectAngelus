@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using ISO.FX;
 
 public class Player : NetworkBehaviour {
 
@@ -82,8 +83,7 @@ public class Player : NetworkBehaviour {
 
 	[ClientRpc]
 	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
-		Debug.Log ("Animating...");
-		GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = (start + end) / 2f;
+		ShootingFactory.CreateShootEffect (start, end);
 	}
 
     private void Die()
