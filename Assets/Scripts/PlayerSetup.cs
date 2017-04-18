@@ -34,10 +34,6 @@ public class PlayerSetup : NetworkBehaviour {
             }
 
             m_ActivePlayer = GetComponent<Player>();
-            if (isServer)
-            {
-                gameObject.AddComponent<FreeForAllGameMode>();
-            }
             SetupPlayerUI();
         }
 	}
@@ -48,14 +44,23 @@ public class PlayerSetup : NetworkBehaviour {
     public override void OnStartClient()
     {
         base.OnStartClient();
-
         string _netID = GetComponent<NetworkIdentity>().netId.ToString();
-        if (isLocalPlayer)
-        {
-            GetComponent<Player>().Setup();
-        }
         Player _player = GetComponent<Player>();
         GameManager.RegisterPlayer(_netID, _player);
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        if (isLocalPlayer)
+        {
+            gameObject.AddComponent<FreeForAllGameMode>();
+            GetComponent<Player>().Setup();
+            if (isServer)
+            {
+                GameManager.SetPlayerHost(m_ActivePlayer);
+            }
+        }
     }
 
     /// <summary>

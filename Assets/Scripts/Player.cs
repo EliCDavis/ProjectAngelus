@@ -36,7 +36,7 @@ public class Player : NetworkBehaviour {
         if (isServer)
         {
             m_FreeForAll = GetComponent<FreeForAllGameMode>();
-            if (m_FreeForAll)
+            if (m_FreeForAll == null)
                 Debug.LogError("Player: Error finding FreeForAllGameMode");
         }
     }
@@ -82,15 +82,18 @@ public class Player : NetworkBehaviour {
         }
     }
 
-    [Command]
+    [Server]
     public void CmdUpdateTotalScores(int _matchScore)
     {
-        RpcUpdateTotalScore(_matchScore);
+        Debug.Log(this.name);
+        Debug.Log(isServer);
+        m_FreeForAll.AddDeath();
+        UpdateTotalScore(_matchScore);
     }
 
 
-    [ClientRpc]
-    public void RpcUpdateTotalScore(int _matchScore)
+    [Client]
+    public void UpdateTotalScore(int _matchScore)
     {
         m_TotalScore = _matchScore;
         Debug.Log("Current Score: " + _matchScore);
@@ -131,26 +134,25 @@ public class Player : NetworkBehaviour {
         if (m_CurrentHealth <= 0)
         {
             Die();
+            
             if (!isLocalPlayer)
             {
                 GameManager.GetPlayer(_enemyPlayer).GetKill();
             }
-            if (isServer)
+            else
             {
-                if (isLocalPlayer)
-                {
-                    Debug.Log(this.name);
-                    m_FreeForAll.AddDeath();
-                }
+                Debug.Log("Syncing kills...");
+                CmdUpdateTotalScores(1);
             }
         }
     }
 
     public void GetKill()
     {
-        m_PlayerScore++;  
+        m_PlayerScore++;
         Debug.Log(this.name + " score is: " + m_PlayerScore);
     }
+
 
     /// <summary>
     /// Get health of player hit

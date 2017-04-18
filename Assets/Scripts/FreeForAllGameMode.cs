@@ -20,8 +20,8 @@ public class FreeForAllGameMode : NetworkBehaviour
     public float m_MatchTime = 10f;
     private int m_TimeRemaining;
     [SyncVar]
-    public int m_TotalKills;
-    private int m_CurrentPlayers;
+    public int m_TotalKills = 0;
+    private int m_CurrentPlayers = 0;
     private Player m_ServerPlayer;
 
 	// Use this for initialization

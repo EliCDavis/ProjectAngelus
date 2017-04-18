@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
 
     public MatchSettings m_MatchSettings;
 
+    public static Player m_PlayerHost;
+
     void Awake()
     {
         if (singleton != null)
@@ -76,6 +78,16 @@ public class GameManager : MonoBehaviour {
     public static int CurrentPlayerCount()
     {
         return m_Players.Count;
+    }
+
+    public static Player GetPlayerHost()
+    {
+        return m_PlayerHost;
+    }
+
+    public static void SetPLayerHost(Player _playerHost)
+    {
+        m_PlayerHost = _playerHost;
     }
 
     #endregion
