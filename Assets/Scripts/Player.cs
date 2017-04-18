@@ -138,6 +138,8 @@ public class Player : NetworkBehaviour {
             disabledOnDeath[i].enabled = false;
         }
 
+
+
         for (int i = 0; i < m_CollidersToDisable.Length; i++)
         {
             m_CollidersToDisable[i].enabled = false;
@@ -204,11 +206,13 @@ public class Player : NetworkBehaviour {
         isDead = false;
         Debug.Log(wasEnabled);
         m_CurrentHealth = m_MaxHealth;
-
-        for (int i = 0; i < disabledOnDeath.Length; i++)
+        if (isLocalPlayer)
         {
-            disabledOnDeath[i].enabled = wasEnabled[i];
-        }
+            for (int i = 0; i < disabledOnDeath.Length; i++)
+            {
+                disabledOnDeath[i].enabled = wasEnabled[i];
+            }
+        }   
 
         for (int i = 0; i < m_CollidersToDisable.Length; i++)
         {
