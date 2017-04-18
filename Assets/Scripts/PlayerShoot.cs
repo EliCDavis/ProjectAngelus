@@ -68,17 +68,18 @@ public class PlayerShoot : NetworkBehaviour {
 			if (Physics.Raycast (bulletSpawn.position, (shootTowards - bulletSpawn.position).normalized, out _hit, m_PlayerWeapon.m_Range, m_Mask)) {
 				CmdAnimateShot (bulletSpawn.position, _hit.point);
 
-				if (_hit.collider.tag == PLAYER_NAME)
-				{
-					CmdPlayerShot(_hit.transform.name, m_PlayerWeapon.m_Damage);
+				if (_hit.collider.tag == PLAYER_NAME && _hit.transform.gameObject != this.gameObject) {
+					CmdPlayerShot (_hit.transform.name, m_PlayerWeapon.m_Damage);
 				}
 			}
 
+		} else {
+
+			CmdAnimateShot (bulletSpawn.position, bulletSpawn.forward*100);
+
 		}
 
-		/*
 
-        */
 
     }
 
