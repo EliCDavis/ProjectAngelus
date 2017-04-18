@@ -66,7 +66,6 @@ public class Player : NetworkBehaviour {
     [ClientRpc]
     private void RpcSetupPlayerOnAllClients()
     {
-        Debug.Log(this.name);
         m_CurrentHealth = m_MaxHealth;
         wasEnabled = new bool[disabledOnDeath.Length];
         for (int i = 0; i < wasEnabled.Length; i++)
@@ -76,28 +75,6 @@ public class Player : NetworkBehaviour {
         }
     }
 
-    [Command]
-    private void CmdBroadcastResetupPlayer()
-    {
-        RpcResetupPlayer();
-    }
-
-    [ClientRpc]
-    private void RpcResetupPlayer()
-    {
-        Debug.Log(this.name);
-        for (int i = 0; i < disabledOnDeath.Length; i++)
-        {
-            disabledOnDeath[i].enabled = wasEnabled[i];
-        }
-
-        for (int i = 0; i < m_CollidersToDisable.Length; i++)
-        {
-            m_CollidersToDisable[i].enabled = true;
-        }
-
-        m_RidgidBody.isKinematic = false;
-    }
     /*
     //For testing
     void Update()
@@ -181,16 +158,10 @@ public class Player : NetworkBehaviour {
     /// <returns></returns>
     private IEnumerator Respawn()
     {
-
+        Debug.Log(this.name);
         yield return new WaitForSeconds(3f);
 
-       
-        if (isLocalPlayer)
-        {
-            CmdBroadcastResetupPlayer();
-            SetDefaults();
-        }
-
+        SetDefaults();
 
         List<Transform> _playerLocations = GameManager.GetPlayerLocations();
         m_SpawnSummations = new Dictionary<float, Transform>();
@@ -231,7 +202,7 @@ public class Player : NetworkBehaviour {
     public void SetDefaults()
     {
         isDead = false;
-
+        Debug.Log(wasEnabled);
         m_CurrentHealth = m_MaxHealth;
 
         for (int i = 0; i < disabledOnDeath.Length; i++)
