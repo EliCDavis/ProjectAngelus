@@ -36,8 +36,6 @@ public class PlayerSetup : NetworkBehaviour {
 
             m_ActivePlayer = GetComponent<Player>();
             SetupPlayerUI();
-
-            GetComponent<Player>().Setup();
         }
 	}
 
@@ -49,8 +47,11 @@ public class PlayerSetup : NetworkBehaviour {
         base.OnStartClient();
 
         string _netID = GetComponent<NetworkIdentity>().netId.ToString();
+        //if (isLocalPlayer)
+        //{
+            GetComponent<Player>().Setup();
+        //}
         Player _player = GetComponent<Player>();
-
         GameManager.RegisterPlayer(_netID, _player);
     }
 

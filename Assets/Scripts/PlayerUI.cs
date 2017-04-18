@@ -24,7 +24,6 @@ public class PlayerUI : MonoBehaviour {
 
             if (m_TextElements[i].name == "HealthNumber")
                 m_HelathNumber = m_TextElements[i];
-            Debug.Log(m_TextElements[i].name);
         }
     }
 

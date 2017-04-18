@@ -29,8 +29,25 @@ public class Player : NetworkBehaviour {
 
 
     public void Setup ()
-    {
+    {  
         CmdBradcastNewPlayerSetup();
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartClient();
+        wasEnabled = new bool[disabledOnDeath.Length];
+        for (int i = 0; i < wasEnabled.Length; i++)
+        {
+            wasEnabled[i] = disabledOnDeath[i].enabled;
+        }
+        SetDefaults();
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        m_CurrentHealth = m_MaxHealth;
     }
 
     void Awake()
@@ -38,6 +55,7 @@ public class Player : NetworkBehaviour {
         m_SpawnLocations = FindObjectsOfType<NetworkStartPosition>();
         m_RidgidBody = GetComponent<Rigidbody>();
     }
+
 
     [Command]
     private void CmdBradcastNewPlayerSetup()
@@ -48,15 +66,38 @@ public class Player : NetworkBehaviour {
     [ClientRpc]
     private void RpcSetupPlayerOnAllClients()
     {
+        Debug.Log(this.name);
+        m_CurrentHealth = m_MaxHealth;
         wasEnabled = new bool[disabledOnDeath.Length];
         for (int i = 0; i < wasEnabled.Length; i++)
         {
             wasEnabled[i] = disabledOnDeath[i].enabled;
+            Debug.Log(disabledOnDeath[i].name);
         }
-
-        SetDefaults();
     }
 
+    [Command]
+    private void CmdBroadcastResetupPlayer()
+    {
+        RpcResetupPlayer();
+    }
+
+    [ClientRpc]
+    private void RpcResetupPlayer()
+    {
+        Debug.Log(this.name);
+        for (int i = 0; i < disabledOnDeath.Length; i++)
+        {
+            disabledOnDeath[i].enabled = wasEnabled[i];
+        }
+
+        for (int i = 0; i < m_CollidersToDisable.Length; i++)
+        {
+            m_CollidersToDisable[i].enabled = true;
+        }
+
+        m_RidgidBody.isKinematic = false;
+    }
     /*
     //For testing
     void Update()
@@ -74,12 +115,13 @@ public class Player : NetworkBehaviour {
     */
 
     /// <summary>
-    /// Removes the passed amount by that much from health
+    /// Removes the passed amount by that much from health and syncs accross the network
     /// </summary>
     /// <param name="_amount">amount to damage</param>
     [ClientRpc]
     public void RpcTakeDamage(float _amount, string _enemyPlayer)
     {
+
         if (isDead)
         {
             return;
@@ -91,21 +133,18 @@ public class Player : NetworkBehaviour {
         if (m_CurrentHealth <= 0)
         {
             Die();
-            CmdGivePoint(_enemyPlayer);
+            if (!isLocalPlayer)
+            {
+                Debug.Log("Giving Kill!");
+                GameManager.GetPlayer(_enemyPlayer).GetKill();
+            }
         }
     }
 
-    [Command]
-    public void CmdGivePoint(string _enemyPlayerName)
-    {
-        Player _enemyPlayer = GameManager.GetPlayer(_enemyPlayerName);
-        _enemyPlayer.RpcGetKill();
-    }
-
-    [ClientRpc]
-    public void RpcGetKill()
+    public void GetKill()
     {
         m_PlayerScore++;
+        GameManager.PlayerDeath();
         Debug.Log(this.name + " score is: " + m_PlayerScore);
     }
 
@@ -145,8 +184,13 @@ public class Player : NetworkBehaviour {
 
         yield return new WaitForSeconds(3f);
 
-        Setup();
-        SetDefaults();
+       
+        if (isLocalPlayer)
+        {
+            CmdBroadcastResetupPlayer();
+            SetDefaults();
+        }
+
 
         List<Transform> _playerLocations = GameManager.GetPlayerLocations();
         m_SpawnSummations = new Dictionary<float, Transform>();

@@ -11,6 +11,8 @@ public class PlayerShoot : NetworkBehaviour {
     [SerializeField]
     private LayerMask m_Mask;                       //Mask for raycasting
 
+    private Player m_ThisPlayer;
+
     void Start()
     {
         if (m_PlayerCamera == null)
@@ -18,6 +20,7 @@ public class PlayerShoot : NetworkBehaviour {
             Debug.LogError("PlayerShoot: Failed to find localplayer camera");
             this.enabled = false;
         }
+        m_ThisPlayer = GetComponent<Player>();
     }
 
     void Update()
