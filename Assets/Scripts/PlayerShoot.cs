@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections.Generic;
 
 public class PlayerShoot : NetworkBehaviour {
 
@@ -42,11 +43,16 @@ public class PlayerShoot : NetworkBehaviour {
         RaycastHit _hit;
         if (Physics.Raycast(m_PlayerCamera.transform.position, m_PlayerCamera.transform.forward, out _hit, m_PlayerWeapon.m_Range, m_Mask))
         {
+
+			CmdAnimateShot (m_PlayerCamera.transform.position, _hit.point);
+
             if (_hit.collider.tag == PLAYER_NAME)
             {
                 CmdPlayerShot(_hit.transform.name, m_PlayerWeapon.m_Damage);
             }
+
         }
+
     }
 
     /// <summary>
@@ -62,5 +68,19 @@ public class PlayerShoot : NetworkBehaviour {
         Player _player = GameManager.GetPlayer(_playerID);
         _player.RpcTakeDamage(_damage);
     }
+
+	/// <summary>
+	/// Animates the shot across the entire network for everyone to see
+	/// </summary>
+	/// <param name="start">Start.</param>
+	/// <param name="end">End.</param>
+	[Command]
+	void CmdAnimateShot(Vector3 start, Vector3 end) {
+		foreach(KeyValuePair<string, Player> entry in GameManager.GetCurrentRegisteredPlayers())
+		{
+			// do something with entry.Value or entry.Key
+			entry.Value.RpcAnimateGunshot(start, end);
+		}
+	}
 
 }

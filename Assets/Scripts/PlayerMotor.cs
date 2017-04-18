@@ -25,7 +25,6 @@ public class PlayerMotor : NetworkBehaviour {
 	
     public void Move(Vector3 _velocity)
     {
-		Debug.Log (_velocity);
         m_Velocity = _velocity;
     }
 
@@ -48,13 +47,13 @@ public class PlayerMotor : NetworkBehaviour {
     {
         PerformMovement();
         PerformRotation();
+		m_RB.velocity = new Vector3(0, m_RB.velocity.y, 0);
     }
 
     void PerformMovement ()
     {
         if (m_Velocity != Vector3.zero)
         {
-			print ("Moving...");
 			m_RB.MovePosition(m_RB.position + (m_Velocity * Time.fixedDeltaTime));
         }
     }

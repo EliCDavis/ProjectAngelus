@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
+		print ("IM RIGHT HERE: "+ transform.name);
         if (singleton != null)
         {
             Debug.LogError("More than one GameManger!");
@@ -59,5 +60,16 @@ public class GameManager : MonoBehaviour {
     {
         return m_Players[_playerID];
     }
+
+
+	/// <summary>
+	/// Gets the current registered players as a dictionary for easy indexing
+	/// </summary>
+	/// <returns>The current registered players.</returns>
+	public static Dictionary<string, Player> GetCurrentRegisteredPlayers()
+	{
+		return m_Players;
+	}
+
     #endregion
 }

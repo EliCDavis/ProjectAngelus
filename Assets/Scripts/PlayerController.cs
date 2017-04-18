@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour {
 
     [SerializeField]
-    private float m_Speed = 5f;
+    private float m_Speed = 10f;
     [SerializeField]
     private float m_LookSpeed;
     [SerializeField]

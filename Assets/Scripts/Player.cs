@@ -11,13 +11,40 @@ public class Player : NetworkBehaviour {
         protected set { _isDead = value;  }
     }
 
+	/// <summary>
+	/// Max player health
+	/// </summary>
     [SerializeField]
-    private float m_MaxHealth = 100f;   //Max player health
-    [SyncVar]
-    private float m_CurrentHealth;      //Current player health
-    [SerializeField]
+    private float m_MaxHealth = 100f;
+    
+	/// <summary>
+	/// Current player health
+	/// </summary>
+	[SyncVar]
+    private float m_CurrentHealth;
+
+
+	[SerializeField]
     private Behaviour[] disabledOnDeath;
-    private bool[] wasEnabled;
+
+	/// <summary>
+	/// The graphics to the mech
+	/// </summary>
+	[SerializeField]
+	private GameObject[] graphics;
+    
+	/// <summary>
+	/// The highlights that glow around the metal of the mech
+	/// </summary>
+	[SerializeField]
+	private Material highlights;
+
+	/// <summary>
+	/// booleans that represent whether or not the
+	/// disabled on death objects where originally
+	/// disabled to begin with
+	/// </summary>
+	private bool[] wasEnabled;
 
 
     public void Setup ()
@@ -30,21 +57,7 @@ public class Player : NetworkBehaviour {
 
         SetDefaults();
     }
-    /*
-    //For testing
-    void Update()
-    {
-        if(!isLocalPlayer)
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            RpcTakeDamage(100);
-        }
-    }
-    */
+  
 
     /// <summary>
     /// Removes the passed amount by that much from health
@@ -67,6 +80,12 @@ public class Player : NetworkBehaviour {
         }
     }
 
+	[ClientRpc]
+	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
+		Debug.Log ("Animating...");
+		GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = (start + end) / 2f;
+	}
+
     private void Die()
     {
         isDead = true;
@@ -77,8 +96,9 @@ public class Player : NetworkBehaviour {
         }
 
         Collider _col = GetComponent<Collider>();
-        if (_col != null)
-            _col.enabled = false;
+		if (_col != null) {
+			_col.enabled = false;
+		}
 
         Debug.Log(transform.name + " died!");
 
@@ -128,4 +148,14 @@ public class Player : NetworkBehaviour {
     {
         return m_CurrentHealth;
     }
+
+	public override void OnStartLocalPlayer()
+	{
+		if (highlights == null) {
+			return; 
+		}
+		highlights.color = new Color (0, 0.8f, 0.8f);
+		highlights.SetColor ("_EmissionColor", new Color (0, 0.8f, 0.8f));
+	}
+
 }
