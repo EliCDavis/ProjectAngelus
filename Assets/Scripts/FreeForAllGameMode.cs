@@ -15,13 +15,14 @@ public class FreeForAllGameMode : NetworkBehaviour
     }
 
     private MatchState m_CurrentState;
-    public int m_PlayersToStart;
-    public int m_KillsToWin;
-    public float m_MatchTime;
+    public int m_PlayersToStart = 2;
+    public int m_KillsToWin = 10;
+    public float m_MatchTime = 10f;
     private int m_TimeRemaining;
     [SyncVar]
     public int m_TotalKills;
     private int m_CurrentPlayers;
+    private Player m_ServerPlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,9 @@ public class FreeForAllGameMode : NetworkBehaviour
             m_CurrentState = MatchState.NotStarted;
             m_CurrentPlayers = GameManager.CurrentPlayerCount();
         }
+        m_ServerPlayer = GetComponent<Player>();
+        if (m_ServerPlayer == null)
+            Debug.LogError("FreeForAllGameMode: Error finding Player Script");
     }
 	
     void AddPlayer()
@@ -54,17 +58,21 @@ public class FreeForAllGameMode : NetworkBehaviour
         return (int) m_CurrentState;
     }
 
+    public int GetCurrentScore()
+    {
+        return m_TotalKills;
+    }
 
     public void AddDeath()
     {
         m_TotalKills++;
+        UpdateTotalScors(m_TotalKills);
         Debug.Log("Total kills: " + m_TotalKills);
-
     }
 
-
-    void EndMatch()
+    
+    public void UpdateTotalScors(int m_TotalKills)
     {
-
+        m_ServerPlayer.CmdUpdateTotalScores(m_TotalKills);
     }
 }

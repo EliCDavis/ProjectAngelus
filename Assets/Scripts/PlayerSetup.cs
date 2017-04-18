@@ -18,7 +18,6 @@ public class PlayerSetup : NetworkBehaviour {
     private Player m_ActivePlayer;
     private PlayerUI m_PlayerUI;
 
-
 	void Start () {
         //If not player
 		if (!isLocalPlayer)
@@ -35,7 +34,10 @@ public class PlayerSetup : NetworkBehaviour {
             }
 
             m_ActivePlayer = GetComponent<Player>();
-            //GetComponent<Player>().Setup();
+            if (isServer)
+            {
+                gameObject.AddComponent<FreeForAllGameMode>();
+            }
             SetupPlayerUI();
         }
 	}

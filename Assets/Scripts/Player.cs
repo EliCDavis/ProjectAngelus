@@ -25,12 +25,20 @@ public class Player : NetworkBehaviour {
     private Dictionary<float, Transform> m_SpawnSummations;
     [SerializeField]
     private int m_PlayerScore = 0;
+    private int m_TotalScore;
     private Rigidbody m_RidgidBody;
+    private FreeForAllGameMode m_FreeForAll;
 
 
     public void Setup ()
     {  
         CmdBradcastNewPlayerSetup();
+        if (isServer)
+        {
+            m_FreeForAll = GetComponent<FreeForAllGameMode>();
+            if (m_FreeForAll)
+                Debug.LogError("Player: Error finding FreeForAllGameMode");
+        }
     }
 
     public override void OnStartLocalPlayer()
@@ -71,10 +79,23 @@ public class Player : NetworkBehaviour {
         for (int i = 0; i < wasEnabled.Length; i++)
         {
             wasEnabled[i] = disabledOnDeath[i].enabled;
-            Debug.Log(disabledOnDeath[i].name);
         }
     }
 
+    [Command]
+    public void CmdUpdateTotalScores(int _matchScore)
+    {
+        RpcUpdateTotalScore(_matchScore);
+    }
+
+
+    [ClientRpc]
+    public void RpcUpdateTotalScore(int _matchScore)
+    {
+        m_TotalScore = _matchScore;
+        Debug.Log("Current Score: " + _matchScore);
+    }
+    
     /*
     //For testing
     void Update()
@@ -112,16 +133,22 @@ public class Player : NetworkBehaviour {
             Die();
             if (!isLocalPlayer)
             {
-                Debug.Log("Giving Kill!");
                 GameManager.GetPlayer(_enemyPlayer).GetKill();
+            }
+            if (isServer)
+            {
+                if (isLocalPlayer)
+                {
+                    Debug.Log(this.name);
+                    m_FreeForAll.AddDeath();
+                }
             }
         }
     }
 
     public void GetKill()
     {
-        m_PlayerScore++;
-        GameManager.PlayerDeath();
+        m_PlayerScore++;  
         Debug.Log(this.name + " score is: " + m_PlayerScore);
     }
 
@@ -160,7 +187,6 @@ public class Player : NetworkBehaviour {
     /// <returns></returns>
     private IEnumerator Respawn()
     {
-        Debug.Log(this.name);
         yield return new WaitForSeconds(3f);
 
         SetDefaults();
@@ -204,7 +230,6 @@ public class Player : NetworkBehaviour {
     public void SetDefaults()
     {
         isDead = false;
-        Debug.Log(wasEnabled);
         m_CurrentHealth = m_MaxHealth;
         if (isLocalPlayer)
         {

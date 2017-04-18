@@ -6,8 +6,6 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager singleton;
 
-    private static FreeForAllGameMode m_GameMode;
-
     public MatchSettings m_MatchSettings;
 
     void Awake()
@@ -21,7 +19,6 @@ public class GameManager : MonoBehaviour {
             singleton = this;
         }
 
-        m_GameMode = GetComponent<FreeForAllGameMode>();
     }
 
     #region playerTracking
@@ -81,10 +78,6 @@ public class GameManager : MonoBehaviour {
         return m_Players.Count;
     }
 
-    public static void PlayerDeath()
-    {
-        m_GameMode.AddDeath();
-    }
     #endregion
 
 }
