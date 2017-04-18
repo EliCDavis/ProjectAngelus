@@ -1439,6 +1439,11 @@ MonoBehaviour:
   disabledOnDeath:
   - {fileID: 114663659847951678}
   - {fileID: 114703311612535648}
+  m_CollidersToDisable:
+  - {fileID: 136930784617276212}
+  - {fileID: 65669415918310304}
+  - {fileID: 65610334448353674}
+  m_PlayerScore: 0
 --- !u!114 &114596756470981700
 MonoBehaviour:
   m_ObjectHideFlags: 1

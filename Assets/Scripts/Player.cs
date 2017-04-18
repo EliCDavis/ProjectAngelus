@@ -18,12 +18,35 @@ public class Player : NetworkBehaviour {
     private float m_CurrentHealth;      //Current player health
     [SerializeField]
     private Behaviour[] disabledOnDeath;
+    [SerializeField]
+    private Collider[] m_CollidersToDisable;
     private bool[] wasEnabled;
     private NetworkStartPosition[] m_SpawnLocations;
     private Dictionary<float, Transform> m_SpawnSummations;
+    [SerializeField]
+    private int m_PlayerScore = 0;
+    private Rigidbody m_RidgidBody;
 
 
     public void Setup ()
+    {
+        CmdBradcastNewPlayerSetup();
+    }
+
+    void Awake()
+    {
+        m_SpawnLocations = FindObjectsOfType<NetworkStartPosition>();
+        m_RidgidBody = GetComponent<Rigidbody>();
+    }
+
+    [Command]
+    private void CmdBradcastNewPlayerSetup()
+    {
+        RpcSetupPlayerOnAllClients();
+    }
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllClients()
     {
         wasEnabled = new bool[disabledOnDeath.Length];
         for (int i = 0; i < wasEnabled.Length; i++)
@@ -32,11 +55,6 @@ public class Player : NetworkBehaviour {
         }
 
         SetDefaults();
-    }
-
-    void Awake()
-    {
-        m_SpawnLocations = FindObjectsOfType<NetworkStartPosition>();
     }
 
     /*
@@ -60,7 +78,7 @@ public class Player : NetworkBehaviour {
     /// </summary>
     /// <param name="_amount">amount to damage</param>
     [ClientRpc]
-    public void RpcTakeDamage(float _amount)
+    public void RpcTakeDamage(float _amount, string _enemyPlayer)
     {
         if (isDead)
         {
@@ -73,8 +91,27 @@ public class Player : NetworkBehaviour {
         if (m_CurrentHealth <= 0)
         {
             Die();
+            CmdGivePoint(_enemyPlayer);
         }
     }
+
+    [Command]
+    public void CmdGivePoint(string _enemyPlayerName)
+    {
+        Player _enemyPlayer = GameManager.GetPlayer(_enemyPlayerName);
+        _enemyPlayer.RpcGetKill();
+    }
+
+    [ClientRpc]
+    public void RpcGetKill()
+    {
+        m_PlayerScore++;
+        Debug.Log(this.name + " score is: " + m_PlayerScore);
+    }
+
+    /// <summary>
+    /// Get health of player hit
+    /// </summary>
 
     private void Die()
     {
@@ -85,9 +122,12 @@ public class Player : NetworkBehaviour {
             disabledOnDeath[i].enabled = false;
         }
 
-        Collider _col = GetComponent<Collider>();
-        if (_col != null)
-            _col.enabled = false;
+        for (int i = 0; i < m_CollidersToDisable.Length; i++)
+        {
+            m_CollidersToDisable[i].enabled = false;
+        }
+
+        m_RidgidBody.isKinematic = true;
 
         Debug.Log(transform.name + " died!");
 
@@ -105,6 +145,7 @@ public class Player : NetworkBehaviour {
 
         yield return new WaitForSeconds(3f);
 
+        Setup();
         SetDefaults();
 
         List<Transform> _playerLocations = GameManager.GetPlayerLocations();
@@ -154,9 +195,12 @@ public class Player : NetworkBehaviour {
             disabledOnDeath[i].enabled = wasEnabled[i];
         }
 
-        Collider _col = GetComponent<Collider>();
-        if (_col != null)
-            _col.enabled = true;
+        for (int i = 0; i < m_CollidersToDisable.Length; i++)
+        {
+            m_CollidersToDisable[i].enabled = true;
+        }
+
+        m_RidgidBody.isKinematic = false;
     }
 
     public float GetMaxHealth()
@@ -167,5 +211,10 @@ public class Player : NetworkBehaviour {
     public float GetCurrentHealth()
     {
         return m_CurrentHealth;
+    }
+
+    public int GetCurrentScore()
+    {
+        return m_PlayerScore;
     }
 }
