@@ -60,6 +60,10 @@ public class PlayerShoot : NetworkBehaviour {
 		if (Physics.Raycast(m_PlayerCamera.transform.position, m_PlayerCamera.transform.forward, out _hit, m_PlayerWeapon.m_Range, m_Mask))
         {
 			shootTowards = _hit.point;
+            if (_hit.collider.tag == PLAYER_NAME)
+            {
+                CmdPlayerShot(_hit.transform.name, m_PlayerWeapon.m_Damage);
+            }
         }
 
 		if (shootTowards != Vector3.zero) {
@@ -93,7 +97,7 @@ public class PlayerShoot : NetworkBehaviour {
         Debug.Log(_playerID + " has beed shot!");
 
         Player _player = GameManager.GetPlayer(_playerID);
-        _player.RpcTakeDamage(_damage);
+        _player.RpcTakeDamage(_damage, this.name);
     }
 
 	/// <summary>
