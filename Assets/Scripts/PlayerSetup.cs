@@ -58,7 +58,7 @@ public class PlayerSetup : NetworkBehaviour {
             GetComponent<Player>().Setup();
             if (isServer)
             {
-                GameManager.SetPlayerHost(m_ActivePlayer);
+                //GameManager.SetPlayerHost(m_ActivePlayer);
             }
         }
     }

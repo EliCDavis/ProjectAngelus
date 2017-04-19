@@ -23,22 +23,17 @@ public class Player : NetworkBehaviour {
     private bool[] wasEnabled;
     private NetworkStartPosition[] m_SpawnLocations;
     private Dictionary<float, Transform> m_SpawnSummations;
+
     [SerializeField]
     private int m_PlayerScore = 0;
-    private int m_TotalScore;
+    [SyncVar]
+    private int m_MatchTotalScore;
     private Rigidbody m_RidgidBody;
-    private FreeForAllGameMode m_FreeForAll;
 
 
     public void Setup ()
     {  
         CmdBradcastNewPlayerSetup();
-        if (isServer)
-        {
-            m_FreeForAll = GetComponent<FreeForAllGameMode>();
-            if (m_FreeForAll == null)
-                Debug.LogError("Player: Error finding FreeForAllGameMode");
-        }
     }
 
     public override void OnStartLocalPlayer()
@@ -81,23 +76,6 @@ public class Player : NetworkBehaviour {
             wasEnabled[i] = disabledOnDeath[i].enabled;
         }
     }
-
-    [Server]
-    public void CmdUpdateTotalScores(int _matchScore)
-    {
-        Debug.Log(this.name);
-        Debug.Log(isServer);
-        m_FreeForAll.AddDeath();
-        UpdateTotalScore(_matchScore);
-    }
-
-
-    [Client]
-    public void UpdateTotalScore(int _matchScore)
-    {
-        m_TotalScore = _matchScore;
-        Debug.Log("Current Score: " + _matchScore);
-    }
     
     /*
     //For testing
@@ -137,19 +115,19 @@ public class Player : NetworkBehaviour {
             
             if (!isLocalPlayer)
             {
-                GameManager.GetPlayer(_enemyPlayer).GetKill();
-            }
-            else
-            {
-                Debug.Log("Syncing kills...");
-                CmdUpdateTotalScores(1);
+                Player _hitPlayer;
+                _hitPlayer = GameManager.GetPlayer(_enemyPlayer);
+                _hitPlayer.GetKill(_enemyPlayer);
             }
         }
     }
 
-    public void GetKill()
+    public void GetKill(string _playerID)
     {
         m_PlayerScore++;
+        m_MatchTotalScore++;
+        Debug.Log("Match total score" + m_MatchTotalScore);
+        //GameManager.GetPlayer(_playerID).CmdUpdateTotalScore(m_PlayerScore);
         Debug.Log(this.name + " score is: " + m_PlayerScore);
     }
 
@@ -157,7 +135,6 @@ public class Player : NetworkBehaviour {
     /// <summary>
     /// Get health of player hit
     /// </summary>
-
     private void Die()
     {
         isDead = true;

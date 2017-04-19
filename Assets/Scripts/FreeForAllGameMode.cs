@@ -66,13 +66,7 @@ public class FreeForAllGameMode : NetworkBehaviour
     public void AddDeath()
     {
         m_TotalKills++;
-        UpdateTotalScors(m_TotalKills);
+        //UpdateTotalScors(m_TotalKills);
         Debug.Log("Total kills: " + m_TotalKills);
-    }
-
-    
-    public void UpdateTotalScors(int m_TotalKills)
-    {
-        m_ServerPlayer.CmdUpdateTotalScores(m_TotalKills);
     }
 }
