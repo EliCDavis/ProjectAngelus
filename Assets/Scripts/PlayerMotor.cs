@@ -47,13 +47,14 @@ public class PlayerMotor : NetworkBehaviour {
     {
         PerformMovement();
         PerformRotation();
+		m_RB.velocity = new Vector3(0, m_RB.velocity.y, 0);
     }
 
     void PerformMovement ()
     {
         if (m_Velocity != Vector3.zero)
         {
-            m_RB.MovePosition(m_RB.position + m_Velocity * Time.fixedDeltaTime);
+			m_RB.MovePosition(m_RB.position + (m_Velocity * Time.fixedDeltaTime));
         }
     }
     

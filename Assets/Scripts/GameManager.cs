@@ -8,8 +8,11 @@ public class GameManager : MonoBehaviour {
 
     public MatchSettings m_MatchSettings;
 
+    public static Player m_PlayerHost;
+
     void Awake()
     {
+		print ("IM RIGHT HERE: "+ transform.name);
         if (singleton != null)
         {
             Debug.LogError("More than one GameManger!");
@@ -18,6 +21,7 @@ public class GameManager : MonoBehaviour {
         {
             singleton = this;
         }
+
     }
 
     #region playerTracking
@@ -59,5 +63,44 @@ public class GameManager : MonoBehaviour {
     {
         return m_Players[_playerID];
     }
+
+
+	/// <summary>
+	/// Gets the current registered players as a dictionary for easy indexing
+	/// </summary>
+	/// <returns>The current registered players.</returns>
+	public static Dictionary<string, Player> GetCurrentRegisteredPlayers()
+	{
+		return m_Players;
+	}
+    
+    public static List<Transform> GetPlayerLocations()
+    {
+        List<Transform> _playerlocations = new List<Transform>();
+
+        foreach (var item in m_Players)
+        {
+            _playerlocations.Add(item.Value.transform);
+        }
+
+        return _playerlocations;
+    }
+
+    public static int CurrentPlayerCount()
+    {
+        return m_Players.Count;
+    }
+
+    public static Player GetPlayerHost()
+    {
+        return m_PlayerHost;
+    }
+
+    public static void SetPLayerHost(Player _playerHost)
+    {
+        m_PlayerHost = _playerHost;
+    }
+
     #endregion
+
 }
