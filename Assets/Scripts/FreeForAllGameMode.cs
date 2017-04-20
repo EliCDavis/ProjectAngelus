@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class FreeForAllGameMode : NetworkBehaviour
 {
+    public static FreeForAllGameMode m_Singleton;
+
     enum MatchState
     {
         NotStarted,
@@ -19,26 +21,36 @@ public class FreeForAllGameMode : NetworkBehaviour
     public int m_KillsToWin = 10;
     public float m_MatchTime = 10f;
     private int m_TimeRemaining;
-    [SyncVar]
     public int m_TotalKills = 0;
     private int m_CurrentPlayers = 0;
     private Player m_ServerPlayer;
+    private NetworkIdentity m_NetID;
 
 	// Use this for initialization
 	void Start () {
         if (isServer)
         {
             m_CurrentState = MatchState.NotStarted;
-            m_CurrentPlayers = GameManager.CurrentPlayerCount();
         }
-        m_ServerPlayer = GetComponent<Player>();
-        if (m_ServerPlayer == null)
-            Debug.LogError("FreeForAllGameMode: Error finding Player Script");
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        m_NetID = GetComponent<NetworkIdentity>();
+        m_Singleton = this;
+
+        if (isServer)
+        {
+            m_CurrentState = MatchState.NotStarted;
+        }
     }
 	
     void AddPlayer()
     {
         m_CurrentPlayers++;
+
         if (m_CurrentPlayers >= m_PlayersToStart)
         {
             m_CurrentState = MatchState.Starting;
@@ -63,10 +75,10 @@ public class FreeForAllGameMode : NetworkBehaviour
         return m_TotalKills;
     }
 
-    public void AddDeath()
+    [ClientRpc]
+    public void RpcAddDeath()
     {
         m_TotalKills++;
-        //UpdateTotalScors(m_TotalKills);
         Debug.Log("Total kills: " + m_TotalKills);
     }
 }

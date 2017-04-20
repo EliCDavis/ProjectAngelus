@@ -58,11 +58,13 @@ public class Player : NetworkBehaviour {
     [SyncVar]
     private int m_MatchTotalScore;
     private Rigidbody m_RidgidBody;
+    private FreeForAllGameMode m_MatchManager;
 
 
     public void Setup ()
     {  
         CmdBradcastNewPlayerSetup();
+
     }
 
     public override void OnStartLocalPlayer()
@@ -80,12 +82,14 @@ public class Player : NetworkBehaviour {
 		}
 		highlights.color = new Color (0, 0.8f, 0.8f);
 		highlights.SetColor ("_EmissionColor", new Color (0, 0.8f, 0.8f));
-
     }
 
     public override void OnStartClient()
     {
         base.OnStartClient();
+        m_MatchManager = FreeForAllGameMode.m_Singleton;
+        if (m_MatchManager == null)
+            Debug.LogError("Player: Error finding FreeForAll GameMode");
         m_CurrentHealth = m_MaxHealth;
     }
 
@@ -112,22 +116,6 @@ public class Player : NetworkBehaviour {
             wasEnabled[i] = disabledOnDeath[i].enabled;
         }
     }
-    
-    /*
-    //For testing
-    void Update()
-    {
-        if(!isLocalPlayer)
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            RpcTakeDamage(100);
-        }
-    }
-    */
 
     /// <summary>
     /// Removes the passed amount by that much from health and syncs accross the network
@@ -158,6 +146,12 @@ public class Player : NetworkBehaviour {
         }
     }
 
+    [Command]
+    void CmdUpdateTotalKillCount()
+    {
+        m_MatchManager.RpcAddDeath();
+    }
+
 	[ClientRpc]
 	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
 		ShootingFactory.CreateShootEffect (start, end);
@@ -166,9 +160,7 @@ public class Player : NetworkBehaviour {
     public void GetKill(string _playerID)
     {
         m_PlayerScore++;
-        m_MatchTotalScore++;
-        Debug.Log("Match total score" + m_MatchTotalScore);
-        //GameManager.GetPlayer(_playerID).CmdUpdateTotalScore(m_PlayerScore);
+        CmdUpdateTotalKillCount();
         Debug.Log(this.name + " score is: " + m_PlayerScore);
     }
 

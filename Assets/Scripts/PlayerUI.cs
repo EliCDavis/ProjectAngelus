@@ -11,12 +11,13 @@ public class PlayerUI : MonoBehaviour {
     private Text m_ScoreText;
     private Text m_MatchScore;
     private Player m_CurrentPlayer;
+    private FreeForAllGameMode m_FreeForAllMode;
     private float m_maxHealth;
     private float m_CurrentHealth;
 
     void Awake()
     {
-        m_HealthSlider = GetComponent<Slider>();
+        m_HealthSlider = GetComponentInChildren<Slider>();
         m_TextElements = GetComponentsInChildren<Text>();
         for (int i = 0; i != m_TextElements.Length; i++)
         {
@@ -38,7 +39,8 @@ public class PlayerUI : MonoBehaviour {
         m_HealthSlider.maxValue = m_maxHealth;
         m_HealthSlider.value = m_maxHealth;
         m_ScoreText.text = "Score: " + m_CurrentPlayer.GetCurrentScore().ToString();
-        //m_MatchScore.text = "Match Kills: " + GameManager.GetCurrentTotalScore();
+        m_FreeForAllMode = FreeForAllGameMode.m_Singleton;
+        m_MatchScore.text = "Match Kills: " + m_FreeForAllMode.GetCurrentScore();
     }
 
     void Update()
@@ -47,6 +49,6 @@ public class PlayerUI : MonoBehaviour {
         m_HealthSlider.value = m_CurrentHealth;
         m_HelathNumber.text = m_CurrentHealth.ToString();
         m_ScoreText.text = "Score: " + m_CurrentPlayer.GetCurrentScore().ToString();
-        //m_MatchScore.text = "Match Kills: " + GameManager.GetCurrentTotalScore();
+        m_MatchScore.text = "Match Kills: " + m_FreeForAllMode.GetCurrentScore();
     }
 }

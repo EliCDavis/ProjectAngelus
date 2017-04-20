@@ -56,10 +56,6 @@ public class PlayerSetup : NetworkBehaviour {
         {
             gameObject.AddComponent<FreeForAllGameMode>();
             GetComponent<Player>().Setup();
-            if (isServer)
-            {
-                //GameManager.SetPlayerHost(m_ActivePlayer);
-            }
         }
     }
 
