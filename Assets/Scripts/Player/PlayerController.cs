@@ -32,8 +32,8 @@ public class PlayerController : NetworkBehaviour {
             m_Motor.Jump(m_JumpForce);
         }
 
-		Vector3 _movHorizontal = transform.right * Input.GetAxisRaw("Horizontal");
-		Vector3 _movVertical = transform.forward * Input.GetAxisRaw("Vertical");
+		Vector3 _movHorizontal = -transform.right * Input.GetAxisRaw("Horizontal");
+		Vector3 _movVertical = -transform.forward * Input.GetAxisRaw("Vertical");
 
         Vector3 _velocity = (_movHorizontal + _movVertical).normalized * m_Speed;
 

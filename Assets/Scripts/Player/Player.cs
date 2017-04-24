@@ -80,13 +80,14 @@ public class Player : NetworkBehaviour {
 		if (highlights == null) {
 			return; 
 		}
-		highlights.color = new Color (0, 0.8f, 0.8f);
+
+        highlights.color = new Color (0, 0.8f, 0.8f);
 		highlights.SetColor ("_EmissionColor", new Color (0, 0.8f, 0.8f));
     }
 
-    public override void OnStartClient()
+    public override void OnStartServer()
     {
-        base.OnStartClient();
+        base.OnStartServer();
         m_MatchManager = FreeForAllGameMode.m_Singleton;
         if (m_MatchManager == null)
             Debug.LogError("Player: Error finding FreeForAll GameMode");

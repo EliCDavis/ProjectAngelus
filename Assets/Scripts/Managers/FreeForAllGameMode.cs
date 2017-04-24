@@ -32,6 +32,7 @@ public class FreeForAllGameMode : NetworkBehaviour
         {
             m_CurrentState = MatchState.NotStarted;
         }
+
     }
 
     public override void OnStartClient()
@@ -40,6 +41,10 @@ public class FreeForAllGameMode : NetworkBehaviour
 
         m_NetID = GetComponent<NetworkIdentity>();
         m_Singleton = this;
+        if (m_Singleton == null)
+        {
+            Debug.LogError("FreeForAllGameMode: Error setting singleton!");
+        }
 
         if (isServer)
         {

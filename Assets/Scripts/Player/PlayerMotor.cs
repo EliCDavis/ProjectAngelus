@@ -15,6 +15,7 @@ public class PlayerMotor : NetworkBehaviour {
     private Vector3 m_Rotation = Vector3.zero;
     private float m_CameraRotationX = 0f;
     private float m_CurrentRotataionX = 0f;
+    [SerializeField]
     private float m_MaxCameraRotation = 90f;
     private Rigidbody m_RB;
 
@@ -63,7 +64,7 @@ public class PlayerMotor : NetworkBehaviour {
         m_RB.MoveRotation(m_RB.rotation * Quaternion.Euler(m_Rotation));
         if (m_Head != null && m_Arm != null)
         {
-            m_CurrentRotataionX -= m_CameraRotationX;
+            m_CurrentRotataionX += m_CameraRotationX;
             m_CurrentRotataionX = Mathf.Clamp(m_CurrentRotataionX, -m_MaxCameraRotation, m_MaxCameraRotation);
 
             m_Head.transform.localEulerAngles = new Vector3(m_CurrentRotataionX, 0f, 0f);
