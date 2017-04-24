@@ -48,6 +48,8 @@ GameObject:
   - component: {fileID: 114549548736995852}
   - component: {fileID: 114467847125964232}
   - component: {fileID: 114564515893063038}
+  - component: {fileID: 215918850277499422}
+  - component: {fileID: 65232334936234998}
   m_Layer: 0
   m_Name: PlayerPrefabScaleFixed
   m_TagString: Player
@@ -408,7 +410,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220545619244126}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 11.909562, y: 1.5709488e-13, z: 19.786633}
+  m_LocalPosition: {x: 11.909562, y: 0.5227852, z: 19.786633}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4879675010372190}
@@ -688,7 +690,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1790187051196688}
   m_LocalRotation: {x: 0.016724437, y: -0.96808815, z: 0.24876836, w: 0.025297672}
-  m_LocalPosition: {x: -0.018, y: 1.2550001, z: -0.42}
+  m_LocalPosition: {x: -0.018, y: 1.2550001, z: -0.102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4407102077481588}
@@ -906,7 +908,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 3
   m_Materials:
   - {fileID: 2100000, guid: a3c4bc5fe8ac1654c863f1fad3fcafa9, type: 2}
   m_StaticBatchInfo:
@@ -1345,6 +1347,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65232334936234998
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220545619244126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.29626563, y: 0.2489512, z: 0.29626563}
+  m_Center: {x: 0, y: -0.3089267, z: 0}
 --- !u!81 &81942152770404272
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1540,6 +1554,7 @@ MonoBehaviour:
   highlights: {fileID: 2100000, guid: d2000466d9bc2914cb3bbf974cc1d12f, type: 2}
   m_CollidersToDisable:
   - {fileID: 136074781169219086}
+  - {fileID: 65232334936234998}
   m_PlayerScore: 0
 --- !u!114 &114777163691227618
 MonoBehaviour:
@@ -1588,7 +1603,39 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.36185238
-  m_Height: 1.2680955
+  m_Radius: 0.4355998
+  m_Height: 1.1630579
   m_Direction: 1
-  m_Center: {x: 0.13955933, y: 0.4738946, z: -0.028424442}
+  m_Center: {x: 0.0111784935, y: 0.4213758, z: -0.028424442}
+--- !u!215 &215918850277499422
+ReflectionProbe:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220545619244126}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Type: 0
+  m_Mode: 1
+  m_RefreshMode: 1
+  m_TimeSlicingMode: 2
+  m_Resolution: 128
+  m_UpdateFrequency: 0
+  m_BoxSize: {x: 4.4213524, y: 4.2070503, z: 4.150585}
+  m_BoxOffset: {x: -0.03424549, y: 1.6777513, z: -0.15358162}
+  m_NearClip: 0.3
+  m_FarClip: 1000
+  m_ShadowDistance: 100
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IntensityMultiplier: 1
+  m_BlendDistance: 1
+  m_HDR: 1
+  m_BoxProjection: 0
+  m_RenderDynamicObjects: 0
+  m_UseOcclusionCulling: 1
+  m_Importance: 1
+  m_CustomBakedTexture: {fileID: 0}
