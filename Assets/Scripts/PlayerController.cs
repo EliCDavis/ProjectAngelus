@@ -7,29 +7,33 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour {
 
     [SerializeField]
-    private float m_Speed = 5f;
-
+    private float m_Speed = 10f;
     [SerializeField]
     private float m_LookSpeed;
-
     [SerializeField]
     private float m_MaxLookRadious;
-
+    [SerializeField]
+    private float m_DistanceToGround;
+    [SerializeField]
+    private float m_JumpForce;
+    [SerializeField]
+    private LayerMask m_LayerMask;
     private PlayerMotor m_Motor;
     private float m_XLookTotal;
 
-	// Use this for initialization
 	void Start () {
         m_Motor = GetComponent<PlayerMotor>();	
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        float _xMov = Input.GetAxisRaw("Horizontal");
-        float _zMov = Input.GetAxisRaw("Vertical");
 
-        Vector3 _movHorizontal = transform.right * _xMov;
-        Vector3 _movVertical = transform.forward * _zMov;
+        if (Input.GetButtonDown("Jump") && Physics.Raycast(transform.position, -transform.up, m_DistanceToGround))
+        {
+            m_Motor.Jump(m_JumpForce);
+        }
+
+		Vector3 _movHorizontal = transform.right * Input.GetAxisRaw("Horizontal");
+		Vector3 _movVertical = transform.forward * Input.GetAxisRaw("Vertical");
 
         Vector3 _velocity = (_movHorizontal + _movVertical).normalized * m_Speed;
 
