@@ -12,6 +12,17 @@ namespace ISO.FX {
 			return laserInstance;
 		}
 
+        private static GameObject m_HitEffectPrefab;
+        private static GameObject GetHitEffectPrefab()
+        {
+            if (m_HitEffectPrefab == null)
+            {
+                m_HitEffectPrefab = Resources.Load<GameObject>("Prefabs/HitEffect");
+            }
+
+            return m_HitEffectPrefab;
+        }
+
 		/// <summary>
 		/// Creates an effect that looks like a laser. Cleans itself up.
 		/// </summary>
@@ -37,6 +48,28 @@ namespace ISO.FX {
 			GameObject.Destroy (laser, .1f);
 
 		}
+
+        public static void CreatHitEffect(Transform _hitPoint)
+        {
+            GameObject hitParticles = new GameObject("Hit Particles");
+
+            ParticleSystem particleSys = hitParticles.AddComponent<ParticleSystem>();
+
+            particleSys.Stop(); 
+
+            var main = particleSys.main;
+            var emmision = particleSys.emission;
+
+            main.duration = 1f;
+            main.startLifetime = 1f;
+            main.startSize = 0.05f;
+            main.startColor = new Color(0f, 0f, 0f, 0f);
+            emmision.rateOverTime = 0f;
+            //emmision
+
+            
+
+        }
 
 	}
 

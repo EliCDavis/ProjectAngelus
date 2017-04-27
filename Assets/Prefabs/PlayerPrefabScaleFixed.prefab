@@ -48,7 +48,6 @@ GameObject:
   - component: {fileID: 114549548736995852}
   - component: {fileID: 114467847125964232}
   - component: {fileID: 114564515893063038}
-  - component: {fileID: 215918850277499422}
   - component: {fileID: 65232334936234998}
   m_Layer: 0
   m_Name: PlayerPrefabScaleFixed
@@ -1516,6 +1515,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   bulletSpawn: {fileID: 4306398670857716}
+  m_HitEffect: {fileID: 1024509900591280, guid: 670de7b190f501041873977a1f7cd111,
+    type: 2}
 --- !u!114 &114564515893063038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1607,35 +1608,3 @@ CapsuleCollider:
   m_Height: 1.1630579
   m_Direction: 1
   m_Center: {x: 0.0111784935, y: 0.4213758, z: -0.028424442}
---- !u!215 &215918850277499422
-ReflectionProbe:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1220545619244126}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Type: 0
-  m_Mode: 1
-  m_RefreshMode: 1
-  m_TimeSlicingMode: 2
-  m_Resolution: 128
-  m_UpdateFrequency: 0
-  m_BoxSize: {x: 4.4213524, y: 4.2070503, z: 4.150585}
-  m_BoxOffset: {x: -0.03424549, y: 1.6777513, z: -0.15358162}
-  m_NearClip: 0.3
-  m_FarClip: 1000
-  m_ShadowDistance: 100
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IntensityMultiplier: 1
-  m_BlendDistance: 1
-  m_HDR: 1
-  m_BoxProjection: 0
-  m_RenderDynamicObjects: 0
-  m_UseOcclusionCulling: 1
-  m_Importance: 1
-  m_CustomBakedTexture: {fileID: 0}
