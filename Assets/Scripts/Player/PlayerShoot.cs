@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using ISO.FX;
 
 public class PlayerShoot : NetworkBehaviour {
 
@@ -83,11 +84,8 @@ public class PlayerShoot : NetworkBehaviour {
             }
 		}
 
-		/*
-
-        */
-
     }
+
 
     /// <summary>
     /// The remote player has been hit and needs to do damage
@@ -103,6 +101,7 @@ public class PlayerShoot : NetworkBehaviour {
         _player.RpcTakeDamage(_damage, this.name);
     }
 
+
 	/// <summary>
 	/// Animates the shot across the entire network for everyone to see
 	/// </summary>
@@ -110,11 +109,18 @@ public class PlayerShoot : NetworkBehaviour {
 	/// <param name="end">End.</param>
 	[Command]
 	void CmdAnimateShot(Vector3 start, Vector3 end) {
-		foreach(KeyValuePair<string, Player> entry in GameManager.GetCurrentRegisteredPlayers())
-		{
-			// do something with entry.Value or entry.Key
-			entry.Value.RpcAnimateGunshot(start, end);
-		}
+		// do something with entry.Value or entry.Key
+		this.RpcAnimateGunshot(start, end);
 	}
 
+
+	/// <summary>
+	/// Animates the gunshot for anyone who has this
+	/// </summary>
+	/// <param name="start">Start.</param>
+	/// <param name="end">End.</param>
+	[ClientRpc]
+	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
+		ShootingFactory.CreateShootEffect (start, end);
+	}
 }

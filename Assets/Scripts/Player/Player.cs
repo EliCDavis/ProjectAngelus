@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
-using ISO.FX;
 using System.Collections.Generic;
 
 public class Player : NetworkBehaviour {
@@ -153,10 +152,7 @@ public class Player : NetworkBehaviour {
         m_MatchManager.RpcAddDeath();
     }
 
-	[ClientRpc]
-	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
-		ShootingFactory.CreateShootEffect (start, end);
-	}
+
 
     public void GetKill(string _playerID)
     {
