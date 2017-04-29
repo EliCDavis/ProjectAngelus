@@ -5,6 +5,10 @@ using UnityEngine.Networking;
 
 public class FreeForAllGameMode : NetworkBehaviour
 {
+
+    /// <summary>
+    /// Static variable to make finding the match manager easer
+    /// </summary>
     public static FreeForAllGameMode m_Singleton;
 
     enum MatchState
@@ -17,29 +21,49 @@ public class FreeForAllGameMode : NetworkBehaviour
     }
 
     private MatchState m_CurrentState;
-    public int m_PlayersToStart = 2;
+    public int m_PlayersToStart = 1;
     public int m_KillsToWin = 10;
-    public float m_MatchTime = 10f;
-    private int m_TimeRemaining;
+
+    /// <summary>
+    /// Time of match in seconds
+    /// 1000 = 10 minuites
+    /// </summary>
+    [SerializeField]
+    private float m_MatchTime = 1000f;
+    private float m_TimeRemaining = 0f;
     public int m_TotalKills = 0;
     private int m_CurrentPlayers = 0;
-    private Player m_ServerPlayer;
-    private NetworkIdentity m_NetID;
 
 	// Use this for initialization
 	void Start () {
         if (isServer)
         {
             m_CurrentState = MatchState.NotStarted;
+            m_TimeRemaining = m_MatchTime;
+        }
+    }
+
+    void Update()
+    {
+        if (m_CurrentState == MatchState.InProgress)
+        {
+            m_TimeRemaining -= Time.deltaTime;
+            Debug.Log(m_TimeRemaining);
         }
 
+        if (m_TimeRemaining <= 0)
+            EndMatch();
+    }
+
+    private void EndMatch()
+    {
+        m_CurrentState = MatchState.Ended;
     }
 
     public override void OnStartClient()
     {
         base.OnStartClient();
 
-        m_NetID = GetComponent<NetworkIdentity>();
         m_Singleton = this;
         if (m_Singleton == null)
         {
@@ -52,11 +76,11 @@ public class FreeForAllGameMode : NetworkBehaviour
         }
     }
 	
-    void AddPlayer()
+    [ClientRpc]
+    public void RpcAddPlayer()
     {
         m_CurrentPlayers++;
-
-        if (m_CurrentPlayers >= m_PlayersToStart)
+        if (m_CurrentPlayers == m_PlayersToStart)
         {
             m_CurrentState = MatchState.Starting;
             StartMatch();
@@ -78,6 +102,11 @@ public class FreeForAllGameMode : NetworkBehaviour
     public int GetCurrentScore()
     {
         return m_TotalKills;
+    }
+
+    public float GetCurrentTimeLeft()
+    {
+        return m_TimeRemaining;
     }
 
     [ClientRpc]

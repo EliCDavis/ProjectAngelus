@@ -10,6 +10,7 @@ public class PlayerUI : MonoBehaviour {
     private Text m_HelathNumber;
     private Text m_ScoreText;
     private Text m_MatchScore;
+    private Text m_TextTimeLeft;
     private Player m_CurrentPlayer;
     private FreeForAllGameMode m_FreeForAllMode;
     private float m_maxHealth;
@@ -29,6 +30,10 @@ public class PlayerUI : MonoBehaviour {
 
             if (m_TextElements[i].name == "MatchKills")
                 m_MatchScore = m_TextElements[i];
+
+            if (m_TextElements[i].name == "MatchTime")
+                m_TextTimeLeft = m_TextElements[i];
+
         }
     }
 
@@ -41,6 +46,7 @@ public class PlayerUI : MonoBehaviour {
         m_ScoreText.text = "Score: " + m_CurrentPlayer.GetCurrentScore().ToString();
         m_FreeForAllMode = FreeForAllGameMode.m_Singleton;
         m_MatchScore.text = "Match Kills: " + m_FreeForAllMode.GetCurrentScore();
+        m_TextTimeLeft.text = "Time Left: " + m_FreeForAllMode.GetCurrentTimeLeft();
     }
 
     void Update()
@@ -50,5 +56,6 @@ public class PlayerUI : MonoBehaviour {
         m_HelathNumber.text = m_CurrentHealth.ToString();
         m_ScoreText.text = "Score: " + m_CurrentPlayer.GetCurrentScore().ToString();
         m_MatchScore.text = "Match Kills: " + m_FreeForAllMode.GetCurrentScore();
+        m_TextTimeLeft.text = "Time Left: " + m_FreeForAllMode.GetCurrentTimeLeft();
     }
 }
