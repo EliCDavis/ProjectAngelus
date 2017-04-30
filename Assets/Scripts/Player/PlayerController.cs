@@ -27,8 +27,11 @@ public class PlayerController : NetworkBehaviour {
 	
 	void Update () {
 
-        if (Input.GetButtonDown("Jump") && Physics.Raycast(transform.position, -transform.up, m_DistanceToGround))
+		RaycastHit hit;
+
+		if (Input.GetButtonDown("Jump") && Physics.Raycast(transform.position, -transform.up, out hit, m_DistanceToGround))
         {
+			print (hit.transform.gameObject.name);
             m_Motor.Jump(m_JumpForce);
         }
 

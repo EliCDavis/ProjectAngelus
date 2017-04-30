@@ -12,6 +12,16 @@ namespace ISO.FX {
 			return laserInstance;
 		}
 
+		private static AudioClip shootEffect = null;
+		private static AudioClip getShoootEffect(){
+			if (shootEffect == null)
+			{
+				shootEffect = Resources.Load<AudioClip>("SFX/single");
+			}
+
+			return shootEffect;
+		}
+
         private static GameObject m_HitEffectPrefab;
         private static GameObject GetHitEffectPrefab()
         {
@@ -46,6 +56,13 @@ namespace ISO.FX {
 			line.material = GetLaserMaterial ();
 
 			GameObject.Destroy (laser, .1f);
+
+			GameObject soundFX = new GameObject ("shoot SFX");
+			soundFX.transform.position = start;
+			soundFX.AddComponent<AudioSource> ().clip = getShoootEffect ();
+			soundFX.GetComponent<AudioSource> ().volume = .25f;
+			soundFX.GetComponent<AudioSource> ().Play ();
+			GameObject.Destroy (soundFX, getShoootEffect().length);
 
 		}
 

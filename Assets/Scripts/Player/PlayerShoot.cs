@@ -26,11 +26,25 @@ public class PlayerShoot : NetworkBehaviour {
 	[SerializeField]
 	private Transform bulletSpawn;
 
+	/// <summary>
+	/// The effect instantiated where our bullet hits
+	/// </summary>
     [SerializeField]
     private GameObject m_HitEffect;
 
+	/// <summary>
+	/// How many shots the player can fire a second
+	/// </summary>
+	[SerializeField]
+	private int fireRate = 5;
+
+	private float timeOfLastFire;
+
     void Start()
     {
+
+		timeOfLastFire = -1f;
+
         if (m_PlayerCamera == null)
         {
             Debug.LogError("PlayerShoot: Failed to find localplayer camera");
@@ -41,8 +55,9 @@ public class PlayerShoot : NetworkBehaviour {
     void Update()
     {
         //Just doing single fire for now...
-        if (Input.GetButtonDown("Fire1"))
+		if (timeOfLastFire + (1f/(float)fireRate) < Time.time &&Input.GetButtonDown("Fire1"))
         {
+			timeOfLastFire = Time.time;
             Shoot();
         }
     }
