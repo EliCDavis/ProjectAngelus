@@ -25,6 +25,11 @@ public class Player : NetworkBehaviour {
 	[SyncVar]
     private float m_CurrentHealth;
 
+	/// <summary>
+	/// The sound that plays when the player takes damage
+	/// </summary>
+	[SerializeField]
+	private AudioSource damageSound;
 
 	[SerializeField]
     private Behaviour[] disabledOnDeath;
@@ -168,18 +173,23 @@ public class Player : NetworkBehaviour {
 
         Debug.Log(transform.name + " now has " + m_CurrentHealth + " health.");
 
-        if (m_CurrentHealth <= 0)
-        {
-            Die();
+		if (m_CurrentHealth <= 0) {
+			Die ();
             
-            if (!isLocalPlayer)
-            {
-                Player _hitPlayer;
-                _hitPlayer = GameManager.GetPlayer(_enemyPlayer);
-                _hitPlayer.GetKill(_enemyPlayer);
-            }
-        }
+			if (!isLocalPlayer) {
+				Player _hitPlayer;
+				_hitPlayer = GameManager.GetPlayer (_enemyPlayer);
+				_hitPlayer.GetKill (_enemyPlayer);
+			}
+		} else {
+			StartCoroutine (AnimateTakingDamage());
+		}
     }
+
+	private IEnumerator AnimateTakingDamage(){
+		damageSound.Play ();
+		yield return new WaitForSeconds (.5f);
+	}
 
     [Command]
     void CmdUpdateTotalKillCount()
