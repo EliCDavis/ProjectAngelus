@@ -39,6 +39,14 @@ public class PlayerUI : MonoBehaviour {
 
     public void SetUpUI(Player _player)
     {
+        StartCoroutine(SetupUIAfterSpawn(_player));
+    }
+
+
+    IEnumerator SetupUIAfterSpawn(Player _player)
+    {
+
+        yield return new WaitForSeconds(1f);
         if (_player != null)
         {
             GetUIComponets();
@@ -57,6 +65,8 @@ public class PlayerUI : MonoBehaviour {
         {
             Debug.LogError("PlayerUI: Error setting the Player object!");
         }
+
+
     }
 
     void Update()
@@ -64,13 +74,13 @@ public class PlayerUI : MonoBehaviour {
         //Never do this...
         if (m_FreeForAllMode == null)
         {
-            m_FreeForAllMode = FreeForAllGameMode.m_Singleton;
+            return;
         }
         m_CurrentHealth = m_CurrentPlayer.GetCurrentHealth();
         m_HealthSlider.value = m_CurrentHealth;
         m_HelathNumber.text = m_CurrentHealth.ToString();
         m_ScoreText.text = "Score: " + m_CurrentPlayer.GetCurrentScore().ToString();
         m_MatchScore.text = "Match Kills: " + m_FreeForAllMode.GetCurrentScore();
-        m_TextTimeLeft.text = "Time Left: " + m_FreeForAllMode.GetCurrentTimeLeft();
+        m_TextTimeLeft.text = "Time Left: " + m_FreeForAllMode.GetCurrentTimeLeft().ToString("0.00");
     }
 }

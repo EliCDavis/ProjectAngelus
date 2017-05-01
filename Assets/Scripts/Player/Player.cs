@@ -59,13 +59,18 @@ public class Player : NetworkBehaviour {
     private int m_MatchTotalScore;
     private Rigidbody m_RidgidBody;
     private FreeForAllGameMode m_MatchManager;
+    private NetworkManager m_NetworkLobbyManager;
 
 
     public void Setup ()
     {  
         CmdBradcastNewPlayerSetup();
+        m_NetworkLobbyManager = NetworkLobbyManager.singleton;
 
+        //m_NetworkLobbyManager.OnClientSceneChanged();
     }
+
+
 
     void Update()
     {
@@ -75,7 +80,7 @@ public class Player : NetworkBehaviour {
         // This is just a quick fix...
         if (m_MatchManager == null)
         {
-            m_MatchManager = FreeForAllGameMode.m_Singleton;
+            //m_MatchManager = FreeForAllGameMode.m_Singleton;
         }
     }
 
@@ -95,6 +100,14 @@ public class Player : NetworkBehaviour {
 
         highlights.color = new Color (0, 0.8f, 0.8f);
 		highlights.SetColor ("_EmissionColor", new Color (0, 0.8f, 0.8f));
+
+        if (!isServer)
+        {
+            m_MatchManager = FreeForAllGameMode.m_Singleton;
+            if (m_MatchManager == null)
+                Debug.LogError("Player: Error finding FreeForAllGameMode");
+        }
+        m_CurrentHealth = m_MaxHealth;
     }
 
     public override void OnStartServer()
@@ -111,11 +124,24 @@ public class Player : NetworkBehaviour {
         {
             return;
         }
-        m_MatchManager = FreeForAllGameMode.m_Singleton;
-        if (m_MatchManager == null)
-            Debug.LogError("Player: Error finding FreeForAll GameMode");
+
+        StartCoroutine(WaitForNetSpawn());
+
         m_CurrentHealth = m_MaxHealth;
     }
+
+    IEnumerator WaitForNetSpawn()
+    {
+        yield return new WaitForSeconds(1f);
+        if (isServer)
+        {
+            m_MatchManager = FreeForAllGameMode.m_Singleton;
+            if (m_MatchManager == null)
+                Debug.LogError("Player: Error finding FreeForAllGameMode");
+        }
+    }
+
+    
 
     void Awake()
     {
@@ -258,7 +284,6 @@ public class Player : NetworkBehaviour {
             }
         }
 
-        //Transform _startPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = _toSpawn.position;
         transform.rotation = _toSpawn.rotation;
 
