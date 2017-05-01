@@ -62,15 +62,15 @@ public class PlayerUI : MonoBehaviour {
     void Update()
     {
         //Never do this...
-        if (m_FreeForAllMode == null)
-        {
-            m_FreeForAllMode = FreeForAllGameMode.m_Singleton;
-        }
-        m_CurrentHealth = m_CurrentPlayer.GetCurrentHealth();
-        m_HealthSlider.value = m_CurrentHealth;
-        m_HelathNumber.text = m_CurrentHealth.ToString();
-        m_ScoreText.text = "Score: " + m_CurrentPlayer.GetCurrentScore().ToString();
-        m_MatchScore.text = "Match Kills: " + m_FreeForAllMode.GetCurrentScore();
-        m_TextTimeLeft.text = "Time Left: " + m_FreeForAllMode.GetCurrentTimeLeft();
+		if (m_FreeForAllMode == null) {
+			m_FreeForAllMode = FreeForAllGameMode.m_Singleton;
+		} else {
+			m_CurrentHealth = m_CurrentPlayer.GetCurrentHealth();
+			m_HealthSlider.value = m_CurrentHealth;
+			m_HelathNumber.text = m_CurrentHealth.ToString();
+			m_ScoreText.text = "Score: " + m_CurrentPlayer.GetCurrentScore().ToString();
+			m_MatchScore.text = "Match Kills: " + m_FreeForAllMode.GetCurrentScore();
+			m_TextTimeLeft.text = "Time Left: " + m_FreeForAllMode.GetCurrentTimeLeft();
+		}
     }
 }
