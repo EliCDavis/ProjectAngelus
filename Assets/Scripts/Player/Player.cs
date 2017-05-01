@@ -31,6 +31,8 @@ public class Player : NetworkBehaviour {
 	[SerializeField]
 	private AudioSource damageSound;
 
+
+
 	[SerializeField]
     private Behaviour[] disabledOnDeath;
 
