@@ -2,31 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCameraHitWall : MonoBehaviour
+namespace ISO.Player
 {
 
-    private Vector3 m_OrginalDistance;
+	public class PlayerCameraHitWall : MonoBehaviour
+	{
 
-    [SerializeField]
-    private float m_SphereCastSize = 0.1f;
+		/// <summary>
+		/// The player we aim to always be in sight  
+		/// </summary>
+		[SerializeField]
+		private GameObject playerToKeepInSight;
 
-    void Awake()
-    {
-        m_OrginalDistance = transform.position;   
-    }
+		/// <summary>
+		/// How close the camera will get to the camera
+		/// </summary>
+		private float maxPlayerProximity = 1f;
 
-    void Update()
-    {
-        RaycastHit hit;
+		private float initialDistance;
 
-        Vector3 _pos = transform.position;
+	    [SerializeField]
+	    private float m_SphereCastSize = 0.1f;
 
-        // Cast a sphere around the camera. If the sphere hits anyhting then move the camera there.
+	    void Start()
+	    {
+			if (playerToKeepInSight == null) {
+				Destroy (this);
+				return;
+			}
+			this.initialDistance = Vector3.Distance(transform.position, playerToKeepInSight.transform.position);
+	    }
 
-        if (Physics.SphereCast(_pos, m_SphereCastSize, -transform.forward, out hit, 2))
-        {
-            transform.position = hit.transform.position;
-            Debug.Log("Camera hit the wall at pos: " + hit.transform.position);
-        }
-    }
+		void OnCollisionEnter(){
+			print ("Camera collision");
+		}
+
+	    void Update()
+	    {
+	        RaycastHit hit;
+
+			Vector3 cameraToPlayer = playerToKeepInSight.transform.position - transform.position + Vector3.up;
+
+			if (Physics.SphereCast (transform.position, m_SphereCastSize, -transform.forward, out hit, 1)) {
+
+				// Move camera appropriatly
+				transform.position += cameraToPlayer.normalized * hit.distance;
+
+				// Recalculate vector
+				cameraToPlayer = playerToKeepInSight.transform.position - transform.position + Vector3.up;
+
+				// Ensure we're not too close
+				if (cameraToPlayer.magnitude < maxPlayerProximity) {
+					print ("Way too close");
+					transform.position -= cameraToPlayer.normalized * (maxPlayerProximity - cameraToPlayer.magnitude);
+				}
+
+			} else if(Physics.SphereCast (transform.position, m_SphereCastSize, -transform.forward, out hit, 2f)) {
+				// do nothing
+			}else if (cameraToPlayer.magnitude > initialDistance + .5f) {
+				transform.position += cameraToPlayer.normalized*(initialDistance - cameraToPlayer.magnitude);
+			} else if(cameraToPlayer.magnitude < initialDistance - .5f) {
+				transform.position -= cameraToPlayer.normalized*(initialDistance - cameraToPlayer.magnitude);
+			}
+	    }
+	}
+
 }

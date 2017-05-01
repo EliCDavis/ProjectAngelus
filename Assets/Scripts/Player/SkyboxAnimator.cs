@@ -21,8 +21,8 @@ namespace ISO.Player {
 				return;
 			}
 
-			skybox.SetFloat ("_Exposure", 3f + (2f*Mathf.Sin(Time.time*2)));
-			skybox.SetFloat ("_Rotation", (Time.time*2) %360);
+			skybox.SetFloat ("_Exposure", 3f + (2f * Mathf.Sin(Time.time * 2)) + (Mathf.PerlinNoise(1, Time.time*5)*2f) );
+			skybox.SetFloat ("_Rotation", (Time.time*.33f) % 360);
 
 		}
 

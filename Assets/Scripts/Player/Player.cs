@@ -282,7 +282,9 @@ public class Player : NetworkBehaviour {
 
         for (int i = 0; i < m_CollidersToDisable.Length; i++)
         {
-            m_CollidersToDisable[i].enabled = true;
+			if (m_CollidersToDisable [i] != null) {
+				m_CollidersToDisable[i].enabled = true;
+			}
         }
 
         m_RidgidBody.isKinematic = false;
