@@ -1,0 +1,10 @@
+Audio
+------
+
+Laser sound: https://www.youtube.com/watch?v=YeMH2zHrvEA
+Hover/Move sound: https://www.freesound.org/people/peridactyloptrix/sounds/213384/
+Explosion: https://www.youtube.com/watch?v=KzxzfRWBVbY  
+Hit: http://www.freesound.org/people/copyc4t/sounds/235740/
+Spawn: https://www.youtube.com/watch?v=1KHN0RM9z38
+Jump: https://www.sounds-resource.com/wii_u/supersmashbrosforwiiu/sound/4444/
+UI: https://www.youtube.com/watch?v=PuSaY5s_H-0

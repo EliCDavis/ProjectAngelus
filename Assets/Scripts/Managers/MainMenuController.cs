@@ -9,11 +9,6 @@ public class MainMenuController : MonoBehaviour {
     [SerializeField]
     private bool isStartMenu = true;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Space) && isStartMenu)
