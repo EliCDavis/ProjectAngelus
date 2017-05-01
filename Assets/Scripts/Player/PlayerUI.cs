@@ -14,6 +14,9 @@ public class PlayerUI : MonoBehaviour {
     [SerializeField]
     private GameObject m_PlayerStatsParent;
 
+    [SerializeField]
+    private GameObject m_WinObj;
+
     private Slider m_HealthSlider;
     private Text[] m_TextElements;
     private Text m_HelathNumber;
@@ -26,7 +29,12 @@ public class PlayerUI : MonoBehaviour {
     private float m_CurrentHealth;
     private bool m_HasBeenOpen = false;
     private List<GameObject> m_PlayerStatsObjects;
+    public static PlayerUI m_Singleton;
 
+    void Awake()
+    {
+        m_Singleton = this;
+    }
 
     void GetUIComponets()
     {
@@ -135,5 +143,14 @@ public class PlayerUI : MonoBehaviour {
             m_PlayerTextInfo[2].text = _players[i].GetComponent<Player>().GetPing().ToString();
             
         }
+    }
+
+    public void ShowWinnerOfMatch()
+    {
+        m_WinObj.SetActive(true);
+
+        m_WinObj.GetComponent<Text>().text = GameManager.GetHigestPlayer().GetCurrentScore().ToString();
+
+        
     }
 }

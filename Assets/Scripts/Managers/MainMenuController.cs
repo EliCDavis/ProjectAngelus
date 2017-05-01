@@ -10,6 +10,9 @@ public class MainMenuController : MonoBehaviour {
     private Animator m_MenuAnimator;
     [SerializeField]
     private bool isStartMenu = true;
+    [SerializeField]
+    AudioSource transition;
+
 
 	// Update is called once per frame
 	void Update () {
@@ -22,22 +25,26 @@ public class MainMenuController : MonoBehaviour {
 
     public void SwitchStartMenu()
     {
+        transition.Play();
         m_MenuAnimator.SetTrigger("SpaceLeave");
         m_MenuAnimator.SetTrigger("StartMenu");
     }
 
     public void SwitchMatchMenu()
     {
+        transition.Play();
         m_MenuAnimator.SetTrigger("MatchManager");
     }
 
     public void SwitchQuitMenu()
     {
+        transition.Play();
         m_MenuAnimator.SetTrigger("QuitMenu");
     }
 
     public void QuitGame()
     {
+        transition.Play();
         Application.Quit();
     }
 
@@ -49,7 +56,8 @@ public class MainMenuController : MonoBehaviour {
     IEnumerator WaitLoadScene(string _scene)
     {
         FadingManager.m_Singleton.BeginFade(1);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.2f);
+        transition.Play();
         SceneManager.LoadScene(_scene);
     }
 }

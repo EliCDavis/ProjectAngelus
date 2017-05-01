@@ -11,6 +11,12 @@ public class PlayerMotor : NetworkBehaviour {
     [SerializeField]
     private Transform m_Arm;
 
+	/// <summary>
+	/// Sound effect that plays when the player jumps
+	/// </summary>
+	[SerializeField]
+	private AudioSource jumpSound;
+
     private Vector3 m_Velocity = Vector3.zero;
     private Vector3 m_Rotation = Vector3.zero;
     private float m_CameraRotationX = 0f;
@@ -42,6 +48,7 @@ public class PlayerMotor : NetworkBehaviour {
     public void Jump(float _jumpSpeed)
     {
         m_RB.velocity = new Vector3(m_RB.velocity.x, _jumpSpeed, m_RB.velocity.z);
+		jumpSound.Play ();
     }
 
     void FixedUpdate()

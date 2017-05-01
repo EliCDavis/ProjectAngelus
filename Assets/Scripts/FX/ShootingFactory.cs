@@ -27,13 +27,7 @@ namespace ISO.FX {
         {
             if (m_HitEffectPrefab == null)
             {
-                //Not sure how to do this...
-                m_HitEffectPrefab = GameObject.Instantiate(Resources.Load<GameObject>("EFXPrefabs/HitEffect"));
-                if (m_HitEffectPrefab == null)
-                {
-                    Debug.LogError("ShootingFactory: Error Loading HitEffect!");
-                    //return null;
-                }
+                m_HitEffectPrefab = Resources.Load<GameObject>("EFXPrefabs/HitEffect");
             }
             return m_HitEffectPrefab;
         }
@@ -75,7 +69,7 @@ namespace ISO.FX {
 
         public static void CreatHitEffect(Vector3 _hitPoint)
         {
-            GameObject _hitEffect = GetHitEffectPrefab();
+			GameObject _hitEffect = GameObject.Instantiate(GetHitEffectPrefab(), _hitPoint, Quaternion.identity);
 
             _hitEffect.transform.position = _hitPoint;
             _hitEffect.name = "HitEffect";
