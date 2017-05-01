@@ -54,7 +54,7 @@ namespace ISO.FX {
 
 			line.material = GetLaserMaterial ();
 
-            CreatHitEffect(end);
+            //CreatHitEffect(end);
 
 			GameObject.Destroy (laser, .1f);
 
