@@ -56,8 +56,16 @@ public class PlayerSetup : NetworkBehaviour {
         {
             gameObject.AddComponent<FreeForAllGameMode>();
             GetComponent<Player>().Setup();
+            CmdUpdatePlayers();
+            
         }
     }
+    [Command]
+    public void CmdUpdatePlayers()
+    {
+        FreeForAllGameMode.m_Singleton.RpcAddPlayer();
+        Debug.Log("Adding player!"); 
+    } 
 
     /// <summary>
     /// Returns Player object that is the local user is controlling

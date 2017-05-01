@@ -87,10 +87,6 @@ public class PlayerShoot : NetworkBehaviour {
                 if (Physics.Raycast(bulletSpawn.position, (shootTowards - bulletSpawn.position).normalized, out _hit, m_PlayerWeapon.m_Range, m_Mask))
                 {
                     CmdAnimateShot(bulletSpawn.position, _hit.point);
-                    GameObject _hitEffect = Instantiate(m_HitEffect, _hit.point, Quaternion.identity);
-                    Destroy(_hitEffect, 1);
-                    //_hitEffect.transform.SetParent(this.transform);
-
                     if (_hit.collider.tag == PLAYER_NAME)
                     {
                         CmdPlayerShot(_hit.transform.name, m_PlayerWeapon.m_Damage);
