@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayersToStart: 1
   m_KillsToWin: 2
-  m_MatchTime: 100
+  m_MatchTime: 5
   m_TotalKills: 0
 --- !u!4 &889291935
 Transform:
