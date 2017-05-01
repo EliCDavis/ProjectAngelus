@@ -12,6 +12,22 @@ namespace ISO.FX {
 			return laserInstance;
 		}
 
+        private static GameObject m_HitEffectPrefab;
+        private static GameObject GetHitEffectPrefab()
+        {
+            if (m_HitEffectPrefab == null)
+            {
+                //Not sure how to do this...
+                //m_HitEffectPrefab = Instantiate(Resources.Load<GameObject>("EFXPrefabs/HitEffect"));
+                if (m_HitEffectPrefab == null)
+                {
+                    Debug.LogError("ShootingFactory: Error Loading HitEffect!");
+                    //return null;
+                }
+            }
+            return m_HitEffectPrefab;
+        }
+
 		/// <summary>
 		/// Creates an effect that looks like a laser. Cleans itself up.
 		/// </summary>
@@ -37,6 +53,16 @@ namespace ISO.FX {
 			GameObject.Destroy (laser, .1f);
 
 		}
+
+        public static void CreatHitEffect(Vector3 _hitPoint)
+        {
+            GameObject _hitEffect = GetHitEffectPrefab();
+
+            _hitEffect.transform.position = _hitPoint;
+            _hitEffect.name = "HitEffect";
+
+            GameObject.Destroy(_hitEffect, 1f);
+        }
 
 	}
 

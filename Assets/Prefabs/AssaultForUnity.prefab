@@ -1440,6 +1440,9 @@ MonoBehaviour:
   - {fileID: 114703311612535648}
   graphics: []
   highlights: {fileID: 2100000, guid: d2000466d9bc2914cb3bbf974cc1d12f, type: 2}
+  m_CollidersToDisable:
+  - {fileID: 136930784617276212}
+  m_PlayerScore: 0
 --- !u!114 &114663659847951678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1497,7 +1500,7 @@ MonoBehaviour:
   - {fileID: 81470495239236788}
   - {fileID: 114703311612535648}
   m_RemoteLayerMaskName: RemotePlayer
-  m_PlayerUIPrefab: {fileID: 1056304494658354, guid: e11cb8690982905458ddfe75ca2694d9,
+  m_PlayerUIPrefab: {fileID: 1975249495863374, guid: e11cb8690982905458ddfe75ca2694d9,
     type: 2}
 --- !u!124 &124577809260013172
 Behaviour:
