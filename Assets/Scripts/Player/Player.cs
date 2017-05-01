@@ -87,16 +87,13 @@ public class Player : NetworkBehaviour {
     public override void OnStartLocalPlayer()
     {
         base.OnStartClient();
+
         wasEnabled = new bool[disabledOnDeath.Length];
         for (int i = 0; i < wasEnabled.Length; i++)
         {
             wasEnabled[i] = disabledOnDeath[i].enabled;
         }
         SetDefaults();
-
-		if (highlights == null) {
-			return; 
-		}
 
         highlights.color = new Color (0, 0.8f, 0.8f);
 		highlights.SetColor ("_EmissionColor", new Color (0, 0.8f, 0.8f));
@@ -113,18 +110,6 @@ public class Player : NetworkBehaviour {
     public override void OnStartServer()
     {
         base.OnStartServer();
-        wasEnabled = new bool[disabledOnDeath.Length];
-        for (int i = 0; i < wasEnabled.Length; i++)
-        {
-            wasEnabled[i] = disabledOnDeath[i].enabled;
-        }
-        SetDefaults();
-
-        if (highlights == null)
-        {
-            return;
-        }
-
         StartCoroutine(WaitForNetSpawn());
 
         m_CurrentHealth = m_MaxHealth;
@@ -329,5 +314,10 @@ public class Player : NetworkBehaviour {
     public int GetCurrentScore()
     {
         return m_PlayerScore;
+    }
+
+    public int GetPing()
+    {
+        return 1;
     }
 }

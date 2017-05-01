@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +11,6 @@ public class MainMenuController : MonoBehaviour {
     [SerializeField]
     private bool isStartMenu = true;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Space) && isStartMenu)
@@ -46,6 +43,13 @@ public class MainMenuController : MonoBehaviour {
 
     public void LoadScene(string _scene)
     {
+        StartCoroutine(WaitLoadScene(_scene));
+    }
+
+    IEnumerator WaitLoadScene(string _scene)
+    {
+        FadingManager.m_Singleton.BeginFade(1);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(_scene);
     }
 }
