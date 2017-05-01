@@ -59,10 +59,7 @@ public class Player : NetworkBehaviour {
     private Collider[] m_CollidersToDisable;
 
     [SerializeField]
-    private AudioSource m_AudioSource;
-
-    [SerializeField]
-    private AudioClip m_DeathSound;
+	private AudioSource m_DeathSound;
 
     private NetworkStartPosition[] m_SpawnLocations;
     private Dictionary<float, Transform> m_SpawnSummations;
@@ -253,9 +250,7 @@ public class Player : NetworkBehaviour {
             _render[i].enabled = false;
         }
 
-        m_AudioSource.clip = m_DeathSound;
-        m_AudioSource.Play();
-
+		m_DeathSound.Play();
 
         Debug.Log(transform.name + " died!");
 
