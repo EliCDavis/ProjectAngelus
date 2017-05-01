@@ -54,11 +54,13 @@ public class PlayerSetup : NetworkBehaviour {
         base.OnStartLocalPlayer();
         if (isLocalPlayer)
         {
+
             gameObject.AddComponent<FreeForAllGameMode>();
             GetComponent<Player>().Setup();
             StartCoroutine(WaitForSpawn());
-            
         }
+            
+        
     }
 
     IEnumerator WaitForSpawn()
