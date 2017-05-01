@@ -31,7 +31,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void SwitchMatchMenu()
     {
-       
+        m_MenuAnimator.SetTrigger("MatchManager");
     }
 
     public void SwitchQuitMenu()

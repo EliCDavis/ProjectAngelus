@@ -67,6 +67,18 @@ public class Player : NetworkBehaviour {
 
     }
 
+    void Update()
+    {
+        // Never do this...
+        // Could not find the right function to call when all clints have loaded the scene and the network 
+        // manager had loaded in all network objects thus the FreeForAllGameMode game object could not be found.
+        // This is just a quick fix...
+        if (m_MatchManager == null)
+        {
+            m_MatchManager = FreeForAllGameMode.m_Singleton;
+        }
+    }
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartClient();
@@ -88,6 +100,17 @@ public class Player : NetworkBehaviour {
     public override void OnStartServer()
     {
         base.OnStartServer();
+        wasEnabled = new bool[disabledOnDeath.Length];
+        for (int i = 0; i < wasEnabled.Length; i++)
+        {
+            wasEnabled[i] = disabledOnDeath[i].enabled;
+        }
+        SetDefaults();
+
+        if (highlights == null)
+        {
+            return;
+        }
         m_MatchManager = FreeForAllGameMode.m_Singleton;
         if (m_MatchManager == null)
             Debug.LogError("Player: Error finding FreeForAll GameMode");
@@ -156,6 +179,7 @@ public class Player : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
 		ShootingFactory.CreateShootEffect (start, end);
+        //ShootingFactory.CreatHitEffect(end);
 	}
 
     public void GetKill(string _playerID)

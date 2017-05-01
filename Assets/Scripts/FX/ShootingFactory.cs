@@ -17,9 +17,14 @@ namespace ISO.FX {
         {
             if (m_HitEffectPrefab == null)
             {
-                m_HitEffectPrefab = Resources.Load<GameObject>("Prefabs/HitEffect");
+                //Not sure how to do this...
+                //m_HitEffectPrefab = Instantiate(Resources.Load<GameObject>("EFXPrefabs/HitEffect"));
+                if (m_HitEffectPrefab == null)
+                {
+                    Debug.LogError("ShootingFactory: Error Loading HitEffect!");
+                    //return null;
+                }
             }
-
             return m_HitEffectPrefab;
         }
 
@@ -49,26 +54,14 @@ namespace ISO.FX {
 
 		}
 
-        public static void CreatHitEffect(Transform _hitPoint)
+        public static void CreatHitEffect(Vector3 _hitPoint)
         {
-            GameObject hitParticles = new GameObject("Hit Particles");
+            GameObject _hitEffect = GetHitEffectPrefab();
 
-            ParticleSystem particleSys = hitParticles.AddComponent<ParticleSystem>();
+            _hitEffect.transform.position = _hitPoint;
+            _hitEffect.name = "HitEffect";
 
-            particleSys.Stop(); 
-
-            var main = particleSys.main;
-            var emmision = particleSys.emission;
-
-            main.duration = 1f;
-            main.startLifetime = 1f;
-            main.startSize = 0.05f;
-            main.startColor = new Color(0f, 0f, 0f, 0f);
-            emmision.rateOverTime = 0f;
-            //emmision
-
-            
-
+            GameObject.Destroy(_hitEffect, 1f);
         }
 
 	}

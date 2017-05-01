@@ -30,6 +30,7 @@ public class FreeForAllGameMode : NetworkBehaviour
     /// </summary>
     [SerializeField]
     private float m_MatchTime = 1000f;
+    [SyncVar]
     private float m_TimeRemaining = 0f;
     public int m_TotalKills = 0;
     private int m_CurrentPlayers = 0;
