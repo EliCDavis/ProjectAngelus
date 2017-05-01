@@ -68,6 +68,7 @@ public class FreeForAllGameMode : NetworkBehaviour
     IEnumerator EndMatchWait()
     {
         Debug.Log("Preparing to load NetworkingLobby.");
+        PlayerUI.m_Singleton.ShowWinnerOfMatch();
         yield return new WaitForSeconds(5f);
 
         //This is nasty dont do it

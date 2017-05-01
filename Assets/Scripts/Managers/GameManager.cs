@@ -112,6 +112,25 @@ public class GameManager : MonoBehaviour {
         m_PlayerHost = _playerHost;
     }
 
+    public static Player GetHigestPlayer()
+    {
+        float maxScore = 0;
+
+        Player _maxPlayer = new Player();
+
+        foreach (var kvp in m_Players)
+        {
+            if (kvp.Value.GetCurrentScore() > maxScore)
+            {
+                maxScore = kvp.Value.GetCurrentScore();
+                _maxPlayer = kvp.Value;
+            }
+        }
+
+        return _maxPlayer;
+    }
+
+
     #endregion
 
 }
