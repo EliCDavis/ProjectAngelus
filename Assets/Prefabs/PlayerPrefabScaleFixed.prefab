@@ -1592,7 +1592,6 @@ MonoBehaviour:
   highlights: {fileID: 2100000, guid: d2000466d9bc2914cb3bbf974cc1d12f, type: 2}
   m_CollidersToDisable:
   - {fileID: 136074781169219086}
-  - {fileID: 0}
   m_PlayerScore: 0
 --- !u!114 &114777163691227618
 MonoBehaviour:

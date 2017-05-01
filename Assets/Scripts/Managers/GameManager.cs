@@ -64,6 +64,17 @@ public class GameManager : MonoBehaviour {
         return m_Players[_playerID];
     }
 
+    public static List<Player> GetAllPlayers()
+    {
+        List<Player> _players = new List<Player>();
+
+        foreach (var item in m_Players)
+        {
+            _players.Add(item.Value);
+        }
+        return _players;
+    }
+
 
 	/// <summary>
 	/// Gets the current registered players as a dictionary for easy indexing
