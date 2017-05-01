@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -46,6 +48,13 @@ public class MainMenuController : MonoBehaviour {
 
     public void LoadScene(string _scene)
     {
+        StartCoroutine(WaitLoadScene(_scene));
+    }
+
+    IEnumerator WaitLoadScene(string _scene)
+    {
+        FadingManager.m_Singleton.BeginFade(1);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(_scene);
     }
 }

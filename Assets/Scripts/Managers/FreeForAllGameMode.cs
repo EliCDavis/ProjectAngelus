@@ -32,7 +32,7 @@ public class FreeForAllGameMode : NetworkBehaviour
     [SerializeField]
     private float m_MatchTime = 100f;
     [SyncVar]
-    private float m_TimeRemaining = 0f;
+    private float m_TimeRemaining = 10f;
     public int m_TotalKills = 0;
     private int m_CurrentPlayers = 0;
 
@@ -67,13 +67,13 @@ public class FreeForAllGameMode : NetworkBehaviour
 
     IEnumerator EndMatchWait()
     {
-        Debug.Log("Reparing to load NetworkingLobby.");
+        Debug.Log("Preparing to load NetworkingLobby.");
         yield return new WaitForSeconds(5f);
 
         //This is nasty dont do it
         Destroy(GameObject.Find("LobbyManager"));
 
-        SceneManager.LoadScene("NetworkingLobby");
+        SceneManager.LoadScene("Start");
     }
 
     public override void OnStartClient()

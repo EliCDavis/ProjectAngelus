@@ -60,7 +60,7 @@ namespace ISO.FX {
 
 			line.material = GetLaserMaterial ();
 
-            CreatHitEffect(end);
+            //CreatHitEffect(end);
 
 			GameObject.Destroy (laser, .1f);
 
@@ -80,7 +80,7 @@ namespace ISO.FX {
             _hitEffect.transform.position = _hitPoint;
             _hitEffect.name = "HitEffect";
 
-            GameObject.Destroy(_hitEffect, .5f);
+            GameObject.Destroy(_hitEffect, 1f);
         }
 
 	}
