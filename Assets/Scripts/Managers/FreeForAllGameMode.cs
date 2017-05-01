@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class FreeForAllGameMode : NetworkBehaviour
 {
@@ -50,13 +53,27 @@ public class FreeForAllGameMode : NetworkBehaviour
             //Debug.Log(m_TimeRemaining);
         }
 
-        if (m_TimeRemaining <= 0)
+        if (m_TimeRemaining <= 0 && m_CurrentState != MatchState.Ended)
+        {
             EndMatch();
+        }
     }
 
     private void EndMatch()
     {
         m_CurrentState = MatchState.Ended;
+        StartCoroutine(EndMatchWait());
+    }
+
+    IEnumerator EndMatchWait()
+    {
+        Debug.Log("Reparing to load NetworkingLobby.");
+        yield return new WaitForSeconds(5f);
+
+        //This is nasty dont do it
+        Destroy(GameObject.Find("LobbyManager"));
+
+        SceneManager.LoadScene("NetworkingLobby");
     }
 
     public override void OnStartClient()

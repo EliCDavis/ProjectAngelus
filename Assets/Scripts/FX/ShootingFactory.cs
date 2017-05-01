@@ -28,7 +28,7 @@ namespace ISO.FX {
             if (m_HitEffectPrefab == null)
             {
                 //Not sure how to do this...
-                //m_HitEffectPrefab = Instantiate(Resources.Load<GameObject>("EFXPrefabs/HitEffect"));
+                m_HitEffectPrefab = GameObject.Instantiate(Resources.Load<GameObject>("EFXPrefabs/HitEffect"));
                 if (m_HitEffectPrefab == null)
                 {
                     Debug.LogError("ShootingFactory: Error Loading HitEffect!");
@@ -60,6 +60,8 @@ namespace ISO.FX {
 
 			line.material = GetLaserMaterial ();
 
+            CreatHitEffect(end);
+
 			GameObject.Destroy (laser, .1f);
 
 			GameObject soundFX = new GameObject ("shoot SFX");
@@ -78,7 +80,7 @@ namespace ISO.FX {
             _hitEffect.transform.position = _hitPoint;
             _hitEffect.name = "HitEffect";
 
-            GameObject.Destroy(_hitEffect, 1f);
+            GameObject.Destroy(_hitEffect, .5f);
         }
 
 	}
