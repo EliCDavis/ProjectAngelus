@@ -50,6 +50,13 @@ public class Player : NetworkBehaviour {
 
     [SerializeField]
     private Collider[] m_CollidersToDisable;
+
+    [SerializeField]
+    private AudioSource m_AudioSource;
+
+    [SerializeField]
+    private AudioClip m_DeathSound;
+
     private NetworkStartPosition[] m_SpawnLocations;
     private Dictionary<float, Transform> m_SpawnSummations;
 
@@ -226,6 +233,18 @@ public class Player : NetworkBehaviour {
 
         m_RidgidBody.isKinematic = true;
 
+        Renderer[] _render = GetComponentsInChildren<Renderer>();
+
+
+        for (int i = 0; i < _render.Length; i++)
+        {
+            _render[i].enabled = false;
+        }
+
+        m_AudioSource.clip = m_DeathSound;
+        m_AudioSource.Play();
+
+
         Debug.Log(transform.name + " died!");
 
         StartCoroutine(Respawn());
@@ -273,6 +292,13 @@ public class Player : NetworkBehaviour {
         transform.rotation = _toSpawn.rotation;
 
         Debug.Log("Respawning Player: " + transform.name);
+        Renderer[] _render = GetComponentsInChildren<Renderer>();
+
+
+        for (int i = 0; i < _render.Length; i++)
+        {
+            _render[i].enabled = true;
+        }
     }
 
     /// <summary>
