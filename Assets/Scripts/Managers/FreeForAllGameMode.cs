@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
 public class FreeForAllGameMode : NetworkBehaviour
@@ -21,7 +19,7 @@ public class FreeForAllGameMode : NetworkBehaviour
     }
 
     private MatchState m_CurrentState;
-    public int m_PlayersToStart = 1;
+    public int m_PlayersToStart = 0;
     public int m_KillsToWin = 10;
 
     /// <summary>
@@ -29,7 +27,7 @@ public class FreeForAllGameMode : NetworkBehaviour
     /// 1000 = 10 minuites
     /// </summary>
     [SerializeField]
-    private float m_MatchTime = 1000f;
+    private float m_MatchTime = 100f;
     [SyncVar]
     private float m_TimeRemaining = 0f;
     public int m_TotalKills = 0;
@@ -49,7 +47,7 @@ public class FreeForAllGameMode : NetworkBehaviour
         if (m_CurrentState == MatchState.InProgress)
         {
             m_TimeRemaining -= Time.deltaTime;
-            Debug.Log(m_TimeRemaining);
+            //Debug.Log(m_TimeRemaining);
         }
 
         if (m_TimeRemaining <= 0)

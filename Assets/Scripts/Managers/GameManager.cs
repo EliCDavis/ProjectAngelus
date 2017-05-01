@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
-		print ("IM RIGHT HERE: "+ transform.name);
+		//print ("IM RIGHT HERE: "+ transform.name);
         if (singleton != null)
         {
             Debug.LogError("More than one GameManger!");

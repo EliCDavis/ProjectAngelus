@@ -56,19 +56,26 @@ namespace Prototype.NetworkLobby
 
         public void OnClickCreateMatchmakingGame()
         {
-            lobbyManager.StartMatchMaker();
-            lobbyManager.matchMaker.CreateMatch(
-                matchNameInput.text,
-                (uint)lobbyManager.maxPlayers,
-                true,
-				"", "", "", 0, 0,
-				lobbyManager.OnMatchCreate);
+            if (matchNameInput.text != null && matchNameInput.text != "")
+            {
+                lobbyManager.StartMatchMaker();
+                lobbyManager.matchMaker.CreateMatch(
+                    matchNameInput.text,
+                    (uint)lobbyManager.maxPlayers,
+                    true,
+                    "", "", "", 0, 0,
+                    lobbyManager.OnMatchCreate);
 
-            lobbyManager.backDelegate = lobbyManager.StopHost;
-            lobbyManager._isMatchmaking = true;
-            lobbyManager.DisplayIsConnecting();
+                lobbyManager.backDelegate = lobbyManager.StopHost;
+                lobbyManager._isMatchmaking = true;
+                lobbyManager.DisplayIsConnecting();
 
-            lobbyManager.SetServerInfo("Matchmaker Host", lobbyManager.matchHost);
+                lobbyManager.SetServerInfo("Matchmaker Host", lobbyManager.matchHost);
+            }
+            else
+            {
+                Debug.LogError("LobbyMainMenu: \"" + matchNameInput.text + "\" is not a valid name for a server.");
+            }
         }
 
         public void OnClickOpenServerList()

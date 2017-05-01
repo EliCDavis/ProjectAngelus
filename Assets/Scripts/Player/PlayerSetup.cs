@@ -56,10 +56,17 @@ public class PlayerSetup : NetworkBehaviour {
         {
             gameObject.AddComponent<FreeForAllGameMode>();
             GetComponent<Player>().Setup();
-            CmdUpdatePlayers();
+            StartCoroutine(WaitForSpawn());
             
         }
     }
+
+    IEnumerator WaitForSpawn()
+    {
+        yield return new WaitForSeconds(1f);
+        CmdUpdatePlayers();
+    }
+
     [Command]
     public void CmdUpdatePlayers()
     {
