@@ -160,6 +160,8 @@ GameObject:
   - component: {fileID: 399859009}
   - component: {fileID: 399859008}
   - component: {fileID: 399859007}
+  - component: {fileID: 399859013}
+  - component: {fileID: 399859012}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -237,6 +239,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &399859012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 399859006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8352547288041b94e8291fa5f4ca5658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skybox: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
+--- !u!45 &399859013
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 399859006}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
 --- !u!1 &774997277
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,9 +450,17 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11465630, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
-      propertyPath: m_Text
-      value: 
+    - target: {fileID: 11475086, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
+      propertyPath: m_OfflineScene
+      value: NetworkingLobby1v1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475086, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
+      propertyPath: m_LobbyScene
+      value: NetworkingLobby1v1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475086, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
+      propertyPath: m_PlayScene
+      value: 2v2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
