@@ -68,6 +68,9 @@ public class Player : NetworkBehaviour {
     private int m_PlayerScore = 0;
     [SyncVar]
     private int m_MatchTotalScore;
+    [SyncVar]
+    public string m_PlayerName;
+
     private Rigidbody m_RidgidBody;
     private FreeForAllGameMode m_MatchManager;
     private NetworkManager m_NetworkLobbyManager;
@@ -187,6 +190,7 @@ public class Player : NetworkBehaviour {
 				_hitPlayer = GameManager.GetPlayer (_enemyPlayer);
 				_hitPlayer.GetKill (_enemyPlayer);
                 ShootingFactory.CreateDeathEffect(transform.position);
+                Debug.Log(m_PlayerName);
             }
 		} else {
 			StartCoroutine (AnimateTakingDamage());

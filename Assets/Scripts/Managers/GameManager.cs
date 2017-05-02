@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
     /// All players ID's and references are stored in a dectionary for easey reference
     /// Keys are "Player " with ID appenede to end of tag.
     /// </summary>
-    private const string m_PlayerIdPrefix = "Player ";
+    private const string m_PlayerIdPrefix = "";
     private static Dictionary<string, Player> m_Players = new Dictionary<string, Player>();
 
     /// <summary>
