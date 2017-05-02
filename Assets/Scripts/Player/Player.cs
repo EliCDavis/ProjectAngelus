@@ -186,7 +186,8 @@ public class Player : NetworkBehaviour {
 				Player _hitPlayer;
 				_hitPlayer = GameManager.GetPlayer (_enemyPlayer);
 				_hitPlayer.GetKill (_enemyPlayer);
-			}
+                ShootingFactory.CreateDeathEffect(transform.position);
+            }
 		} else {
 			StartCoroutine (AnimateTakingDamage());
 		}
@@ -201,12 +202,13 @@ public class Player : NetworkBehaviour {
     void CmdUpdateTotalKillCount()
     {
         m_MatchManager.RpcAddDeath();
+        
     }
 
 	[ClientRpc]
 	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
 		ShootingFactory.CreateShootEffect (start, end);
-        //ShootingFactory.CreatHitEffect(end);
+        ShootingFactory.CreatHitEffect(end);
 	}
 
     public void GetKill(string _playerID)
