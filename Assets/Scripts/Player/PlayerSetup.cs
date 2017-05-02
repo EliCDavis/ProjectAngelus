@@ -17,6 +17,8 @@ public class PlayerSetup : NetworkBehaviour {
     private string m_PlayerID;                              //Player ID
     private Player m_ActivePlayer;
     private PlayerUI m_PlayerUI;
+    [SyncVar]
+    public string m_PlayerName = "";
 
 	void Start () {
         //If not player
@@ -44,9 +46,11 @@ public class PlayerSetup : NetworkBehaviour {
     public override void OnStartClient()
     {
         base.OnStartClient();
-        string _netID = GetComponent<NetworkIdentity>().netId.ToString();
-        Player _player = GetComponent<Player>();
-        GameManager.RegisterPlayer(_netID, _player);
+        //string _netID = GetComponent<NetworkIdentity>().netId.ToString();
+        //string _netID = this.name;
+        //Player _player = GetComponent<Player>();
+        //GameManager.RegisterPlayer(_netID, _player);
+        StartCoroutine(RegisterPlayers());
     }
 
     public override void OnStartLocalPlayer()
@@ -57,7 +61,7 @@ public class PlayerSetup : NetworkBehaviour {
 
             gameObject.AddComponent<FreeForAllGameMode>();
             GetComponent<Player>().Setup();
-            StartCoroutine(WaitForSpawn());
+            CmdSynRegisterPlayers();
         }
             
         
@@ -67,6 +71,31 @@ public class PlayerSetup : NetworkBehaviour {
     {
         yield return new WaitForSeconds(1f);
         CmdUpdatePlayers();
+    }
+
+    [Command]
+    public void CmdSynRegisterPlayers()
+    {
+        RpcRegisterPlayers();
+    }
+
+    [ClientRpc]
+    public void RpcRegisterPlayers()
+    {
+        StartCoroutine(WaitForSpawn());
+    }
+
+    IEnumerator RegisterPlayers()
+    {
+        yield return new WaitForSeconds(2f);
+        //string _netID = GetComponent<NetworkIdentity>().netId.ToString();
+        string _netID = m_PlayerName;
+
+        this.name = _netID;
+
+        Debug.Log(m_PlayerName);
+        Player _player = GetComponent<Player>();
+        GameManager.RegisterPlayer(_netID, _player);
     }
 
     [Command]
