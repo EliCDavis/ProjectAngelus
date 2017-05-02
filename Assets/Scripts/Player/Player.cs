@@ -64,7 +64,7 @@ public class Player : NetworkBehaviour {
     private NetworkStartPosition[] m_SpawnLocations;
     private Dictionary<float, Transform> m_SpawnSummations;
 
-    [SerializeField]
+    [SyncVar]
     private int m_PlayerScore = 0;
     [SyncVar]
     private int m_MatchTotalScore;
