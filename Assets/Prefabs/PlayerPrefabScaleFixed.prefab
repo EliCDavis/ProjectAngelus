@@ -1854,6 +1854,7 @@ MonoBehaviour:
   m_RemoteLayerMaskName: RemotePlayer
   m_PlayerUIPrefab: {fileID: 1975249495863374, guid: e11cb8690982905458ddfe75ca2694d9,
     type: 2}
+  m_PlayerName: 
 --- !u!114 &114467847125964232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1866,7 +1867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.033333335
+  m_SendInterval: 0.07692308
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -1950,7 +1951,7 @@ MonoBehaviour:
   m_CollidersToDisable:
   - {fileID: 136074781169219086}
   m_DeathSound: {fileID: 82845099451570856}
-  m_PlayerScore: 0
+  m_PlayerName: 
 --- !u!114 &114777163691227618
 MonoBehaviour:
   m_ObjectHideFlags: 1
