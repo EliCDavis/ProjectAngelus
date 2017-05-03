@@ -10,11 +10,15 @@ namespace Prototype.NetworkLobby
     {
         public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
         {
-            //Debug.Log(gamePlayer);
-            if (FreeForAllGameMode.m_Singleton == null)
-            {
-                //Debug.LogError("SetUpPlayerOnLoad: Error finding FreeForAllGameMode");
-            }
+            LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
+            Player _player = gamePlayer.GetComponent<Player>();
+            PlayerSetup _playerSetup = gamePlayer.GetComponent<PlayerSetup>();
+
+            _player.m_PlayerName = lobbyPlayer.name;
+            _playerSetup.m_PlayerName = lobbyPlayer.name;
+
+            Debug.Log(lobbyPlayer.name);
+
         }
     }
 }

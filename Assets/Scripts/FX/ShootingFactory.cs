@@ -32,12 +32,27 @@ namespace ISO.FX {
             return m_HitEffectPrefab;
         }
 
-		/// <summary>
-		/// Creates an effect that looks like a laser. Cleans itself up.
-		/// </summary>
-		/// <param name="start">Start.</param>
-		/// <param name="end">End.</param>
-		public static void CreateShootEffect(Vector3 start, Vector3 end) {
+        private static GameObject m_DeathEffectPrefab;
+        private static GameObject GetDeathEffectPrefab()
+        {
+            if (m_DeathEffectPrefab == null)
+            {
+                m_DeathEffectPrefab = Resources.Load<GameObject>("EFXPrefabs/DeathEffect");
+            }
+            else
+            {
+                Debug.Log("Failed to find resource: \"EFXPrefabs/DeathEffect\"");
+            }
+
+            return m_DeathEffectPrefab;
+        }
+
+        /// <summary>
+        /// Creates an effect that looks like a laser. Cleans itself up.
+        /// </summary>
+        /// <param name="start">Start.</param>
+        /// <param name="end">End.</param>
+        public static void CreateShootEffect(Vector3 start, Vector3 end) {
 
 			GameObject laser = new GameObject("Laser Effect");
 
@@ -75,6 +90,16 @@ namespace ISO.FX {
             _hitEffect.name = "HitEffect";
 
             GameObject.Destroy(_hitEffect, 1f);
+        }
+
+        public static void CreateDeathEffect(Vector3 _deathPoint)
+        {
+            GameObject _deathEffect = GameObject.Instantiate(GetDeathEffectPrefab(), _deathPoint, Quaternion.identity);
+
+            _deathEffect.transform.position = _deathPoint;
+            _deathEffect.name = "DeathEffect";
+
+            GameObject.Destroy(_deathEffect, 1f);
         }
 
 	}

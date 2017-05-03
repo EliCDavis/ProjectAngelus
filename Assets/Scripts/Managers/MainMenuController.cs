@@ -56,8 +56,8 @@ public class MainMenuController : MonoBehaviour {
     IEnumerator WaitLoadScene(string _scene)
     {
         FadingManager.m_Singleton.BeginFade(1);
-        yield return new WaitForSeconds(1.2f);
         transition.Play();
+        yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene(_scene);
     }
 }

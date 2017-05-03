@@ -127,6 +127,7 @@ public class PlayerShoot : NetworkBehaviour {
 	/// <param name="end">End.</param>
 	[ClientRpc]
 	public void RpcAnimateGunshot(Vector3 start, Vector3 end) {
-		ShootingFactory.CreateShootEffect (start, end);
+        ShootingFactory.CreatHitEffect(end);
+        ShootingFactory.CreateShootEffect (start, end);
 	}
 }

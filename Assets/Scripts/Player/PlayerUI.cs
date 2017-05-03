@@ -149,7 +149,7 @@ public class PlayerUI : MonoBehaviour {
     {
         m_WinObj.SetActive(true);
 
-        m_WinObj.GetComponent<Text>().text = GameManager.GetHigestPlayer().GetCurrentScore().ToString();
+        m_WinObj.GetComponent<Text>().text = GameManager.GetHigestPlayer().name;
 
         
     }
