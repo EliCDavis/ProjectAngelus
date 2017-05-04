@@ -15,8 +15,8 @@ SketchUpImporter:
   fileUnit: 0
   sketchUpImportData:
     defaultCamera:
-      position: {x: -3.395542, y: 7.61526, z: -15.659142}
-      lookAt: {x: -0.6789336, y: -75.23145, z: 175.75159}
+      position: {x: -1.3582168, y: 3.046104, z: -6.2636566}
+      lookAt: {x: -0.27157345, y: -30.09258, z: 70.30064}
       up: {x: 0.0056364103, y: 0.9177414, z: 0.3971384}
       fov: 35
       aspectRatio: 0
@@ -125,6 +125,21 @@ SketchUpImporter:
     4300010: Mesh shoulder mount
     4300012: Mesh shoulder cannon
     4300014: Mesh cannon
+    6400000: //RootNode
+    6400002: body base
+    6400004: cannon
+    6400006: cannon 1
+    6400008: Head
+    6400010: hip piece
+    6400012: hip piece 1
+    6400014: hip piece 2
+    6400016: hip piece 3
+    6400018: shoulder
+    6400020: shoulder 1
+    6400022: shoulder cannon
+    6400024: shoulder cannon 1
+    6400026: shoulder mount
+    6400028: shoulder mount 1
   materials:
     importMaterials: 1
     materialName: 2
@@ -151,9 +166,9 @@ SketchUpImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.0254
+    globalScale: 0.0076200003
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
