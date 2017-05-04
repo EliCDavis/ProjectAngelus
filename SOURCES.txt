@@ -1,0 +1,39 @@
+Sound Effects
+--------------
+Laser: https://www.youtube.com/watch?v=YeMH2zHrvEA
+Hover/Move: https://www.freesound.org/people/peridactyloptrix/sounds/213384/
+Explosion: https://www.youtube.com/watch?v=KzxzfRWBVbY  
+Hit: http://www.freesound.org/people/copyc4t/sounds/235740/
+Spawn: https://www.youtube.com/watch?v=1KHN0RM9z38
+Jump: https://www.sounds-resource.com/wii_u/supersmashbrosforwiiu/sound/4444/
+UI button click: https://www.youtube.com/watch?v=PuSaY5s_H-0
+
+
+Music
+---------
+Menu Music:
+	-> Artist: PYLOT
+	-> Album: Shadowtask EP
+	-> Song: Clova
+ 
+Lobby Music:
+	-> Artist: PYLOT
+	-> Album: Shadowtask EP
+	-> Song: Locke
+ 
+In-Game Music: 
+	-> Artist: PYLOT
+	-> Album: Shadowtask EP
+	-> Song: Caine
+
+	
+Fonts
+------
+Tron: http://www.dafont.com/tron.font
+Mechsuit: http://www.dafont.com/mechsuit.font
+BlackHole BB: http://www.1001fonts.com/blackhole-bb-font.html
+
+
+Images
+--------
+Main Menu Background: https://s-media-cache-ak0.pinimg.com/originals/5a/ee/ed/5aeeed64075b07596f3c73226ae89dd9.png
